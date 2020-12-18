@@ -33,7 +33,7 @@ routes.post("/sign-up", (req, res) => {
 
 }) 
 
-routes.get('/clients', (req, res) => {
+routes.get("/clients", (req, res) => {
     try {
         
         db.query(`SELECT clients.id, clients.firstName, clients.lastName, clients.email, clients.password, clients.profile FROM clients`, function (err, result) {
@@ -51,7 +51,7 @@ routes.get('/clients', (req, res) => {
 
 }) 
 
-routes.post('/client/sign-in', (req, res) => {
+routes.post("/client/sign-in", (req, res) => {
     const password = req.body.password
     const email = req.body.email;
     db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, function (err, result) {
@@ -81,6 +81,23 @@ routes.post('/client/sign-in', (req, res) => {
 
     })
 }) 
+
+routes.get("/clients/:id", function(req, res) {
+    try {
+        let id = req.params.id 
+        db.query(`SELECT * FROM clients WHERE clients.id = ?`, [id], function(err, result){
+            if (err){
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })  
+
+    } catch (err) {
+        console.log("catch");
+        res.status(400).send("Error")
+    }
+})
 
 
 
