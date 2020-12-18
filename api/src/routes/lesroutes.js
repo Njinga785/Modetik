@@ -9,6 +9,8 @@ const config = require('./config.js');
 
 //routes clients
 
+                    //sign-up 
+
 routes.post("/sign-up", (req, res) => {
     try {
         if (!req.body.firstName) throw 'NO FIRSTNAME' 
@@ -33,6 +35,8 @@ routes.post("/sign-up", (req, res) => {
 
 }) 
 
+                //get/clients
+
 routes.get("/clients", (req, res) => {
     try {
         
@@ -50,6 +54,9 @@ routes.get("/clients", (req, res) => {
     }
 
 }) 
+
+
+                    //client/sign-in 
 
 routes.post("/client/sign-in", (req, res) => {
     const password = req.body.password
@@ -82,6 +89,8 @@ routes.post("/client/sign-in", (req, res) => {
     })
 }) 
 
+                            //get/client/:id 
+                            
 routes.get("/clients/:id", function(req, res) {
     try {
         let id = req.params.id 
@@ -97,7 +106,11 @@ routes.get("/clients/:id", function(req, res) {
         console.log("catch");
         res.status(400).send("Error")
     }
-})
+}) 
+
+
+
+
 
 
 
