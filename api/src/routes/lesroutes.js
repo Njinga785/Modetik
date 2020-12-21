@@ -178,9 +178,10 @@ routes.post("/produits", (req, res) => {
         if (!req.body.prix) throw 'NO PRICE'
         if (!req.body.description) throw 'NO DESCRIPTION'
         if (!req.body.photo) throw 'NO PHOTO'
-        if (!req.body.categorie_id) throw 'NO CATEGORIE'
+        if (!req.body.categorie_id) throw 'NO CATEGORIE' 
+        console.log(req.body)
 
-        var sql = `INSERT INTO produits (nom, prix, description,photo, categorie_id) VALUES ('${req.body.nom}','${req.body.prix}', '${req.body.description}', '${req.body.phpto}', '${req.body.categorie_id}')`;
+        var sql = `INSERT INTO produits (nom, prix, description, photo, categorie_id) VALUES ('${req.body.nom}', '${req.body.prix}', '${req.body.description}', '${req.body.phpto}', ${parseInt(req.body.categorie_id)})`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result)
@@ -195,6 +196,22 @@ routes.post("/produits", (req, res) => {
 
 })
 
+routes.get("/produits", (req, res) => {
+    try { 
+        db.query(`SELECT * FROM produits`, function (err, result) {
+            if (err) {
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Error") 
+
+    }
+})
 
 
 
