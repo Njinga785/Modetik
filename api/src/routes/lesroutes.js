@@ -114,57 +114,57 @@ routes.get("/clients/:id", function (req, res) {
 routes.put("/clients/:id", async function (req, res) {
 
     try {
-        
-           var password =  await bcrypt.hash(req.body.password, saltRounds)
-            
-        
-        db.query(`UPDATE clients SET firstName = '${ req.body.firstName}', lastName = '${req.body.lastName}', email = '${req.body.email}', password = '${req.body.password}', profile = '${req.body.profile}' WHERE id = ${req.params.id}`, async function (err, results) {
+
+        var password = await bcrypt.hash(req.body.password, saltRounds)
+
+
+        db.query(`UPDATE clients SET firstName = '${req.body.firstName}', lastName = '${req.body.lastName}', email = '${req.body.email}', password = '${req.body.password}', profile = '${req.body.profile}' WHERE id = ${req.params.id}`, async function (err, results) {
             if (err) {
                 res.send(err)
-            
-                } else {
-                    res.status(200).send("Updated")
-                }
-            
+
+            } else {
+                res.status(200).send("Updated")
+            }
+
         })
 
     } catch (err) {
         res.status(400).send(err)
     }
-}) 
+})
 
 
 routes.delete("/clients/:id", async function (req, res) {
-    
-    try { 
-        db.query(`DELETE FROM clients WHERE email = '${req.body.email}'`, async function (err, results) { 
+
+    try {
+        db.query(`DELETE FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {
             if (err) {
                 res.send(err)
-            
-                } else {
-                    res.status(200).send("Delete")
-                }
+
+            } else {
+                res.status(200).send("Delete")
+            }
         })
 
-    }catch (err) { 
+    } catch (err) {
         res.status(400).send(err)
 
     }
-}) 
+})
 
 
 routes.post("/categorie", (req, res) => {
-    try { 
-        if (!req.body.nom) throw 'NO NAME' 
+    try {
+        if (!req.body.nom) throw 'NO NAME'
 
-        var sql = `INSERT INTO categorie (nom) VALUES ('${req.body.nom}')`;  
+        var sql = `INSERT INTO categorie (nom) VALUES ('${req.body.nom}')`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result)
             res.send(result)
         });
 
-    }catch (err) { 
+    } catch (err) {
         console.log(err)
         res.status(403).send(err)
 
@@ -178,7 +178,7 @@ routes.post("/produits", (req, res) => {
         if (!req.body.prix) throw 'NO PRICE'
         if (!req.body.description) throw 'NO DESCRIPTION'
         if (!req.body.photo) throw 'NO PHOTO'
-        if (!req.body.categorie_id) throw 'NO CATEGORIE' 
+        if (!req.body.categorie_id) throw 'NO CATEGORIE'
         console.log(req.body)
 
         var sql = `INSERT INTO produits (nom, prix, description, photo, categorie_id) VALUES ('${req.body.nom}', '${req.body.prix}', '${req.body.description}', '${req.body.phpto}', ${parseInt(req.body.categorie_id)})`;
@@ -197,7 +197,7 @@ routes.post("/produits", (req, res) => {
 })
 
 routes.get("/produits", (req, res) => {
-    try { 
+    try {
         db.query(`SELECT * FROM produits`, function (err, result) {
             if (err) {
                 res.status(400).send("Error")
@@ -208,15 +208,15 @@ routes.get("/produits", (req, res) => {
 
     } catch (err) {
         console.log(err);
-        res.status(400).send("Error") 
+        res.status(400).send("Error")
 
     }
-}) 
+})
 
 routes.get("/produits/:id", (req, res) => {
-    try { 
+    try {
         db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.id}`, function (err, result) {
-            if (err) { 
+            if (err) {
                 console.log(err)
                 res.status(400).send("Error")
             } else {
@@ -226,56 +226,56 @@ routes.get("/produits/:id", (req, res) => {
 
     } catch (err) {
         console.log(err);
-        res.status(400).send("Error") 
+        res.status(400).send("Error")
 
     }
-}) 
+})
 
 
 routes.put("/produits/:id", async function (req, res) {
 
     try {
-        
-           db.query(`UPDATE produits SET nom = '${ req.body.nom}', prix = '${req.body.prix}', description = '${req.body.description}', photo = '${req.body.photo}', categorie_id = '${req.body.categorie_id}' WHERE id = ${req.params.id}`, async function (err, results) {
+
+        db.query(`UPDATE produits SET nom = '${req.body.nom}', prix = '${req.body.prix}', description = '${req.body.description}', photo = '${req.body.photo}', categorie_id = '${req.body.categorie_id}' WHERE id = ${req.params.id}`, async function (err, results) {
             if (err) {
                 res.send(err)
-            
-                } else {
-                    res.status(200).send("Updated")
-                }
-            
+
+            } else {
+                res.status(200).send("Updated")
+            }
+
         })
 
     } catch (err) {
         res.status(400).send(err)
     }
-}) 
+})
 
 
 routes.delete("/produits/:id", async function (req, res) {
-    
-    try { 
-        db.query(`DELETE FROM produits WHERE id = '${req.params.id}'`, async function (err, results) { 
+
+    try {
+        db.query(`DELETE FROM produits WHERE id = '${req.params.id}'`, async function (err, results) {
             if (err) {
                 res.send(err)
-            
-                } else {
-                    res.status(200).send("Delete")
-                }
+
+            } else {
+                res.status(200).send("Delete")
+            }
         })
 
-    }catch (err) { 
+    } catch (err) {
         res.status(400).send(err)
 
     }
-}) 
+})
 
 
 routes.post("/admin/sign-up", (req, res) => {
     try {
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-        
+
         bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(req.body.password, salt, (err, hash) => {
                 console.log(hash)
@@ -291,7 +291,7 @@ routes.post("/admin/sign-up", (req, res) => {
         res.status(403).send(err)
     }
 
-}) 
+})
 
 routes.post("/admin/sign-in", (req, res) => {
     const password = req.body.password
@@ -323,6 +323,31 @@ routes.post("/admin/sign-in", (req, res) => {
 
     })
 })
+
+
+routes.post("/panier", (req, res) => {
+    try {
+        if (!req.body.date) throw 'NO DATE'
+        if (!req.body.total) throw 'NO TOTAL'
+        if (!req.body.client_id) throw 'NO CLIENT'
+        console.log(req.body)
+
+        var sql = `INSERT INTO panier (date, total, client_id) VALUES ('${req.body.date}', '${req.body.total}', ${parseInt(req.body.client_id)})`;
+        db.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log(result)
+            res.send(result)
+        });
+
+
+    } catch (err) {
+        console.log(err)
+        res.status(403).send(err)
+    }
+
+})
+
+
 
 
 
