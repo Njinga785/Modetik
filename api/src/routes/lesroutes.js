@@ -252,6 +252,25 @@ routes.put("/produits/:id", async function (req, res) {
 }) 
 
 
+routes.delete("/produits/:id", async function (req, res) {
+    
+    try { 
+        db.query(`DELETE FROM produits WHERE id = '${req.params.id}'`, async function (err, results) { 
+            if (err) {
+                res.send(err)
+            
+                } else {
+                    res.status(200).send("Delete")
+                }
+        })
+
+    }catch (err) { 
+        res.status(400).send(err)
+
+    }
+}) 
+
+
 
 
 
