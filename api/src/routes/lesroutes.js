@@ -11,6 +11,7 @@ const middlewares = require('../middlewares/middlewares.js');
 //routes clients
 
 //sign-up 
+routes.use("/clients/sign-up", middlewares.emailMiddleware) 
 
 routes.post("/clients/sign-up", (req, res) => {
     try {
@@ -172,6 +173,7 @@ routes.post("/categorie", (req, res) => {
     }
 })
 
+routes.use("/produits", middlewares.tokenMiddleware) 
 
 routes.post("/produits", (req, res) => {
     try {
@@ -334,6 +336,29 @@ routes.post("/panier", (req, res) => {
         console.log(req.body)
 
         var sql = `INSERT INTO panier (date, total, client_id) VALUES ('${req.body.date}', '${req.body.total}', ${parseInt(req.body.client_id)})`;
+        db.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log(result)
+            res.send(result)
+        });
+
+
+    } catch (err) {
+        console.log(err)
+        res.status(403).send(err)
+    }
+
+}) 
+
+
+routes.post("/panieritem", (req, res) => {
+    try {
+        if (!req.body.produit_id) throw 'NO PRODUIT_ID'
+        if (!req.body.panier_id) throw 'NO PANIER_ID'
+        if (!req.body.quantite) throw 'NO QUANTITE'
+        console.log(req.body)
+
+        var sql = `INSERT INTO panieritem (produit_id, panier_id, quantite) VALUES ('${req.body.produit_id}', '${req.body.panier_id}', '${req.body.quantite}')`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result)
