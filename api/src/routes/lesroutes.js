@@ -11,7 +11,7 @@ const config = require('./config.js');
 
 //sign-up 
 
-routes.post("/sign-up", (req, res) => {
+routes.post("/clients/sign-up", (req, res) => {
     try {
         if (!req.body.firstName) throw 'NO FIRSTNAME'
         if (!req.body.lastName) throw 'NO LASTNAME'
@@ -269,6 +269,29 @@ routes.delete("/produits/:id", async function (req, res) {
 
     }
 }) 
+
+
+routes.post("/admin/sign-up", (req, res) => {
+    try {
+        if (!req.body.email) throw 'NO EMAIL'
+        if (!req.body.password) throw 'NO PASSWORD'
+        
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
+                console.log(hash)
+                var sql = `INSERT INTO admin (email, password) VALUES ('${req.body.email}', '${hash}')`;
+                db.query(sql, function (err, result) {
+                    if (err) throw err;
+                    console.log(result)
+                    res.send(result)
+                });
+            });
+        });
+    } catch (err) {
+        res.status(403).send(err)
+    }
+
+})
 
 
 
