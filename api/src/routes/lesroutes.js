@@ -291,7 +291,39 @@ routes.post("/admin/sign-up", (req, res) => {
         res.status(403).send(err)
     }
 
+}) 
+
+routes.post("/admin/sign-in", (req, res) => {
+    const password = req.body.password
+    const email = req.body.email;
+    db.query(`SELECT * FROM admin WHERE email = '${req.body.email}'`, function (err, result) {
+        console.log(result);
+        if (err) {
+            res.send('non')
+        } else {
+            if (result.length > 0) {
+                bcrypt.compare(password, result[0].password, function (error, results) {
+                    console.log(results)
+                    if (results === true) {
+                        let token = jwt.sign({ email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
+                        console.log(token)
+                        res.send({ token: token })
+                        console.log('your recognize')
+                    } else {
+                        console.log('who are you')
+                        console.log(results);
+                    }
+
+                })
+            } else {
+                console.log('faux mail')
+            }
+
+        }
+
+    })
 })
+
 
 
 
