@@ -211,7 +211,46 @@ routes.get("/produits", (req, res) => {
         res.status(400).send("Error") 
 
     }
-})
+}) 
+
+routes.get("/produits/:id", (req, res) => {
+    try { 
+        db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.id}`, function (err, result) {
+            if (err) { 
+                console.log(err)
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Error") 
+
+    }
+}) 
+
+
+routes.put("/produits/:id", async function (req, res) {
+
+    try {
+        
+           db.query(`UPDATE produits SET nom = '${ req.body.nom}', prix = '${req.body.prix}', description = '${req.body.description}', photo = '${req.body.photo}', categorie_id = '${req.body.categorie_id}' WHERE id = ${req.params.id}`, async function (err, results) {
+            if (err) {
+                res.send(err)
+            
+                } else {
+                    res.status(200).send("Updated")
+                }
+            
+        })
+
+    } catch (err) {
+        res.status(400).send(err)
+    }
+}) 
+
 
 
 
