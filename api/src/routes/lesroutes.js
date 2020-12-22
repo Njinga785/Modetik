@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 var salt = bcrypt.genSaltSync(10);
-const config = require('./config.js');
+const config = require('./config.js'); 
+const middlewares = require('../middlewares/middlewares.js');
 
 //routes clients
 
