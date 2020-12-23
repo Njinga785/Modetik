@@ -13,6 +13,18 @@ const tokenMiddleware = (req, res, next) => {
     } else {
         res.status(403).send("Invalid")
     }
+} 
+
+const isAdmin = (req, res, next) => {
+    
+    let token = req.headers.token
+    let verifiedToken = jwt.verify(token, isAdmin, config.secret)
+
+    if (verifiedToken) {
+        next()
+    } else {
+        res.status(403).send("your are not the admin")
+    }
 }
 
 const emailMiddleware = (req, res, next) => {
@@ -26,4 +38,4 @@ const emailMiddleware = (req, res, next) => {
     })
 }
 
-module.exports = {tokenMiddleware, emailMiddleware}
+module.exports = {tokenMiddleware, emailMiddleware, isAdmin}

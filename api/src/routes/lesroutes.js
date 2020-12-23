@@ -5,13 +5,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 var salt = bcrypt.genSaltSync(10);
-const config = require('./config.js'); 
+const config = require('./config.js');
 const middlewares = require('../middlewares/middlewares.js');
 
 //routes clients
 
 //sign-up 
-routes.use("/clients/sign-up", middlewares.emailMiddleware) 
+routes.use("/clients/sign-up", middlewares.emailMiddleware)
 
 routes.post("/clients/sign-up", (req, res) => {
     try {
@@ -59,6 +59,7 @@ routes.get("/clients", (req, res) => {
 
 
 //client/sign-in 
+routes.use("/clients/sign-in", middlewares.tokenMiddleware)
 
 routes.post("/client/sign-in", (req, res) => {
     const password = req.body.password
@@ -173,7 +174,7 @@ routes.post("/categorie", (req, res) => {
     }
 })
 
-routes.use("/produits", middlewares.tokenMiddleware) 
+routes.use("/produits", middlewares.isAdmin)
 
 routes.post("/produits", (req, res) => {
     try {
@@ -308,7 +309,7 @@ routes.post("/admin/sign-in", (req, res) => {
                 bcrypt.compare(password, result[0].password, function (error, results) {
                     console.log(results)
                     if (results === true) {
-                        let token = jwt.sign({ email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
+                        let token = jwt.sign({ email: result[0].email, id: result[0].id, isAdmin: true }, config.secret, { expiresIn: 86400 });
                         console.log(token)
                         res.send({ token: token })
                         console.log('your recognize')
@@ -348,7 +349,7 @@ routes.post("/panier", (req, res) => {
         res.status(403).send(err)
     }
 
-}) 
+})
 
 
 routes.post("/panieritem", (req, res) => {
