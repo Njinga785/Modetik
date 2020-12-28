@@ -58,29 +58,29 @@ export class SignUp extends Component {
                 <div className="form">
                     <h1 className="titreForm">Sign-Up</h1>
                     <Form onSubmit={this.SignUp}>
-                        <Form.Group controlId="formBasicName">
+                        <Form.Group controlId="firstName">
                             <Form.Label>firstName:</Form.Label>
-                            <Form.Control name="firstName" type="text" placeholder="Enter firstName" />
+                            <Form.Control type="text" placeholder="Enter firstName" />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicName">
+                        <Form.Group controlId="lastName">
                             <Form.Label>lastName:</Form.Label>
-                            <Form.Control name="lastName" type="text" placeholder="Enter lastName" />
+                            <Form.Control type="text" placeholder="Enter lastName" />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicEmail">
+                        <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
-                            <Form.Control name="email" type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control name="password" type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicProfile">
+                        <Form.Group controlId="profile">
                             <Form.Label>Profile:</Form.Label>
-                            <Form.Control name="profile" type="text" placeholder="Enter profile" />
+                            <Form.Control type="text" placeholder="Enter profile" />
                         </Form.Group>
 
 
