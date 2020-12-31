@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Nav from 'react-bootstrap/Nav';
 
 export class HeaderAdmin extends Component {
@@ -19,9 +19,12 @@ export class HeaderAdmin extends Component {
     }
     render() {
         return (
-            <header className='black'>
+            <Nav>
                 <Nav.Item>
-                    <Nav.Link as={Link} to="#">Nom du Site</Nav.Link>
+                    <Nav.Link as={Link} to="/sign-up">SignUp</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/sign-inClients">SigninClients</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-upAdmin">SignUpAdmin</Nav.Link>
@@ -37,7 +40,7 @@ export class HeaderAdmin extends Component {
                 </Nav.Item>
 
 
-            </header>
+            </Nav>
         )
     }
 }

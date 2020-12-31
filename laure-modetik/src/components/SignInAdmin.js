@@ -30,7 +30,7 @@ export class SignInAdmin extends Component {
                     localStorage.setItem('isAdmin', true)
                     localStorage.setItem('id', decoded.id)
                     localStorage.setItem('email', decoded.email)
-                    
+                    this.props.history.push('/addproduct', '/addcategorie')
                 } else {
 
                     console.log('acces interdit')
