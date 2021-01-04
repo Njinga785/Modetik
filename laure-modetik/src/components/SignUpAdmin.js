@@ -70,7 +70,7 @@ export class SignUpAdmin extends Component {
 
 
                 <Button variant="primary" type="submit">
-                    Sign-Up
+                    Sign-UpAdmin
                 </Button>
                 <p className="error">{this.state.message}</p>
             </Form>

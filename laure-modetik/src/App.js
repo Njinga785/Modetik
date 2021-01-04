@@ -9,7 +9,7 @@ import SignUpAdmin from './components/SignUpAdmin';
 import AddCategorie from './components/AddCategorie';
 import AddProduct from './components/AddProduct'; 
 // import HeaderAdmin from './components/HeaderAdmin';
-import ProductList from './components/ProductList';
+import Home from './components/Home';
 
 function App() {
   return ( 
@@ -18,16 +18,15 @@ function App() {
       <HeaderHome/> 
       
         <Switch> 
-        <Route exact path='/' component={ProductList}/>
+        <Route exact path='/' component={Home}/>
         <Route exact path='/sign-up' component={SignUp}/> 
-        <Route exact path='/sign-in' component={SignInClients}/> 
+        <Route exact path='/sign-inClients' component={SignInClients}/> 
         <Route exact path='/sign-upAdmin' component={SignUpAdmin}/> 
         <Route exact path='/sign-inAdmin' component={SignInAdmin}/>
         <Route exact path='/addcategorie' component={AddCategorie}/>
         <Route exact path='/addproduct' component={AddProduct}/>
     
-    
-        </Switch>
+      </Switch>
     
     </div> 
     </BrowserRouter>

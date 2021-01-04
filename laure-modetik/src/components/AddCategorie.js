@@ -48,6 +48,7 @@ export class AddCategorie extends Component {
     render() {
         return (
             <div>
+            <h1 className="titreForm">ADD-CATEGORIE</h1>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
                         <Form.Group controlId="categorieNom">

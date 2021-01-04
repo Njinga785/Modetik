@@ -17,7 +17,7 @@ export class ProductList extends Component {
                
                    console.log(response.data) 
                     // this.props.getListProducts(response.data)
-                
+              
             }) 
             .catch(error => {
                 console.error(error)
