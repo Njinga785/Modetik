@@ -21,6 +21,9 @@ export class HeaderAdmin extends Component {
         return (
             <Nav>
                 <Nav.Item>
+                    <Nav.Link as={Link} to="/">ProductList</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                     <Nav.Link as={Link} to="/sign-up">SignUp</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>

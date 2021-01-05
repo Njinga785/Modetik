@@ -1,5 +1,5 @@
 export const signIn = (token, name, email, id) => ({
-    type: "SIGN-IN",
+    type: "SIGN-INADMIN",
     token: token,
     name: name,
     email: email,
@@ -7,5 +7,5 @@ export const signIn = (token, name, email, id) => ({
 })
 
 export const signOut = () => ({
-    type: "SIGN-OUT"
+    type: "SIGN-OUTADMIN"
 })

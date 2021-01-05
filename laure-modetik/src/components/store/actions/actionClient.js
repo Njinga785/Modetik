@@ -1,11 +1,11 @@
-export const signIn = (token, name, email, id) => ({
-    type: "SIGN-IN",
+export const signIn = (token, firstName, email, id) => ({
+    type: "SIGN-INCLIENT",
     token: token,
-    name: name,
+    firstName: firstName,
     email: email,
     id: id
 })
 
 export const signOut = () => ({
-    type: "SIGN-OUT"
+    type: "SIGN-OUTCLIENT"
 })

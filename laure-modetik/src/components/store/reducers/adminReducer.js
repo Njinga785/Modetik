@@ -8,7 +8,7 @@ const initialState = {
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SIGN-IN":
+        case "SIGN-INADMIN":
             return {
                 ...state,
                 token: action.token,
@@ -16,7 +16,7 @@ const adminReducer = (state = initialState, action) => {
                 email: action.email,
                 id: action.id
             };
-        case "SIGN-OUT": 
+        case "SIGN-OUTADMIN": 
             return {
                 ...state, 
                 token: "",

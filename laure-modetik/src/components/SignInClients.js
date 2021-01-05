@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import jwt from "jsonwebtoken";
+import {connect} from 'react-redux' 
+import {signIn} from './store/actions/actionClient'
 
 export class SignInClients extends Component {
     constructor() {
@@ -26,11 +28,11 @@ export class SignInClients extends Component {
 
                 console.log(decoded)
                 if (decoded) {
-                    localStorage.setItem('token', response.data.token)
+                    localStorage.setItem('id', response.data.token)
                       localStorage.setItem('firstName', decoded.firstName)
-                      localStorage.setItem('id', decoded.id)
-                     localStorage.setItem('email', decoded.email)
-                    // this.props.signIn(response.data.token, decoded.name, decoded.email, decoded.id)
+                      localStorage.setItem('token', decoded.email)
+                     localStorage.setItem('email', decoded.id)
+                    this.props.signIn(response.data.token, decoded.firstName, decoded.email, decoded.id)
                     //  this.props.userProducts()
                     //   this.props.history.push('/')
                 } else {
@@ -75,6 +77,10 @@ export class SignInClients extends Component {
             </div>
         )
     }
-}
+} 
 
-export default SignInClients
+const mapDispatchToProps = {
+    signIn 
+ }
+
+export default connect(null, mapDispatchToProps ) (SignInClients)

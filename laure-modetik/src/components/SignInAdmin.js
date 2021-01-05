@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import jwt from "jsonwebtoken";
+import {connect} from 'react-redux' 
+import {signIn} from './store/actions/actionAdmin'
 
 export class SignInAdmin extends Component {
     constructor() {
@@ -27,10 +29,12 @@ export class SignInAdmin extends Component {
                 console.log(decoded)
                 if (decoded) {
                     localStorage.setItem('token', response.data.token)
-                    localStorage.setItem('isAdmin', true)
-                    localStorage.setItem('id', decoded.id)
+                    localStorage.setItem('name', decoded.name)
                     localStorage.setItem('email', decoded.email)
-                    this.props.history.push('/addproduct', '/addcategorie')
+                    localStorage.setItem('id', decoded.id)
+                    localStorage.setItem('isAdmin', true)
+                    this.props.signIn(response.data.token, decoded.name, decoded.email, decoded.id)
+                    this.props.history.push('/addproduct')
                 } else {
 
                     console.log('acces interdit')
@@ -75,4 +79,8 @@ export class SignInAdmin extends Component {
     }
 }
 
-export default SignInAdmin
+const mapDispatchToProps = {
+    signIn 
+ }
+
+export default connect(null, mapDispatchToProps) (SignInAdmin)
