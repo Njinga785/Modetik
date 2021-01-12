@@ -14,7 +14,7 @@ export class SignUpAdmin extends Component {
             message: ''
         }
         // this.message = this.message.bind(this);
-        this.SignUp = this.SignUp.bind(this)
+         this.SignUp = this.SignUp.bind(this)
     } 
 
     async SignUp(e) {

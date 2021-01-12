@@ -3,7 +3,8 @@ var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'modetikbd'
+    database: "modetik",
+    port: 3308
 });
 
 connection.connect(function(error){

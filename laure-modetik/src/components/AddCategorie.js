@@ -15,19 +15,19 @@ export class AddCategorie extends Component {
     handleSubmit = (e) => {
         e.preventDefault({
             categorieNom: this.state.categorieNom,
-            admin_id: localStorage.getItem('id')
+            // admin_id: localStorage.getItem('id')
         })
 
         axios.post(`http://localhost:3003/categorie`, {
             categorieNom: this.state.categorieNom,
-            admin_id: localStorage.getItem('id')
-        },
-            {
-                headers: {
-                    token: localStorage.getItem('token')
+            // admin_id: localStorage.getItem('id')
+        })
+            // {
+            //     headers: {
+            //         token: localStorage.getItem('token')
 
-                }
-            })
+            //     }
+            // })
             .then((response) => {
                 console.log(response)
                 // this.props.addProduct()

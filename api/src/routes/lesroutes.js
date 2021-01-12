@@ -59,9 +59,8 @@ routes.get("/clients", (req, res) => {
 
 
 //client/sign-in 
-routes.use("/clients/sign-in", middlewares.tokenMiddleware)
 
-routes.post("/client/sign-in", (req, res) => {
+routes.post("/clients/sign-in", (req, res) => {
     const password = req.body.password
     const email = req.body.email;
     db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, function (err, result) {
@@ -158,9 +157,9 @@ routes.delete("/clients/:id", async function (req, res) {
 
 routes.post("/categorie", (req, res) => {
     try {
-        if (!req.body.nom) throw 'NO NAME'
+        if (!req.body.categorieNom) throw 'NO NAME'
 
-        var sql = `INSERT INTO categorie (nom) VALUES ('${req.body.nom}')`;
+        var sql = `INSERT INTO categorie (categorieNom) VALUES ('${req.body.categorieNom}')`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result)
@@ -185,7 +184,7 @@ routes.post("/produits", (req, res) => {
         if (!req.body.categorie_id) throw 'NO CATEGORIE'
         console.log(req.body)
 
-        var sql = `INSERT INTO produits (nom, prix, description, photo, categorie_id) VALUES ('${req.body.nom}', '${req.body.prix}', '${req.body.description}', '${req.body.phpto}', ${parseInt(req.body.categorie_id)})`;
+        var sql = `INSERT INTO produits (nom, prix, description, photo, categorie_id) VALUES ('${req.body.nom}', '${req.body.prix}', '${req.body.description}', '${req.body.photo}', ${parseInt(req.body.categorie_id)})`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result)
@@ -277,13 +276,16 @@ routes.delete("/produits/:id", async function (req, res) {
 
 routes.post("/admin/sign-up", (req, res) => {
     try {
+        if (!req.body.name) throw 'NO NAME'
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
+        if (!req.body.profile) throw 'NO PROFILE'
+        
 
         bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(req.body.password, salt, (err, hash) => {
                 console.log(hash)
-                var sql = `INSERT INTO admin (email, password) VALUES ('${req.body.email}', '${hash}')`;
+                var sql = `INSERT INTO admin (name, email, password, profile) VALUES ('${req.body.name}', '${req.body.email}', '${hash}', '${req.body.profile}')`;
                 db.query(sql, function (err, result) {
                     if (err) throw err;
                     console.log(result)
@@ -354,7 +356,7 @@ routes.post("/panier", (req, res) => {
 
 routes.post("/panieritem", (req, res) => {
     try {
-        if (!req.body.produit_id) throw 'NO PRODUIT_ID'
+        if (!req.body.product_id) throw 'NO PRODUIT_ID'
         if (!req.body.panier_id) throw 'NO PANIER_ID'
         if (!req.body.quantite) throw 'NO QUANTITE'
         console.log(req.body)

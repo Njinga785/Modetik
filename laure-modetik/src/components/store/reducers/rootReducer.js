@@ -1,14 +1,14 @@
 import adminReducer from './adminReducer' 
 import clientReducer from './clientReducer'
 import panierReducer from './panierReducer'
-import productsReducer from './productsReducer' 
+import produitsReducer from './produitsReducer' 
 import {combineReducers} from 'redux'  
 
 const rootReducer = combineReducers({
     adminReducer, 
     clientReducer,
     panierReducer,
-    productsReducer, 
+    produitsReducer, 
     
 }) 
 

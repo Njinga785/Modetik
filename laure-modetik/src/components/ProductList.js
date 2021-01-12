@@ -3,13 +3,13 @@ import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
 import { connect } from 'react-redux'
-import { getListProducts } from './store/actions/actionProducts'
+import { getListProduits } from './store/actions/actionProduits'
 
 export class ProductList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: []
+            produits: []
         } 
         
     }
@@ -18,7 +18,7 @@ export class ProductList extends Component {
             .then((response) => {
                
                    console.log(response.data) 
-                    this.props.getListProducts(response.data)
+                    this.props.getListProduits(response.data)
               
             }) 
             .catch(error => {
@@ -26,20 +26,20 @@ export class ProductList extends Component {
               })
     } 
     render() {
-        const products=this.props.products
+        const produits=this.props.produits
         return (
             <div>
-            {products && products.map(product => {
+            {produits && produits.map(produit => {
 
                 return ( 
                 
-                    <CardGroup style={{ width: '18rem' }} className="product-list" key={product.id}>
+                    <CardGroup style={{ width: '18rem' }} className="produit-list" key={produit.id}>
                         <Card  >
                            
-                                <Card.Img variant="top" src={product.photo} width="286" height="180" alt="" />
+                                <Card.Img variant="top" src={produit.photo} width="286" height="180" alt="" />
                                 <Card.Body className="body">
-                                    <Card.Title>{product.nom}</Card.Title>
-                                    <Card.Text>{product.prix}</Card.Text> 
+                                    <Card.Title>{produit.nom}</Card.Title>
+                                    <Card.Text>{produit.prix}</Card.Text> 
                                     
                                 </Card.Body>
                             
@@ -57,11 +57,11 @@ export class ProductList extends Component {
 } 
 
 const mapStateToProps = (state) => ({
-    products: state.productsReducer.products
+    produits: state.produitsReducer.produits
 })
 
 const mapDispatchToProps = {
-    getListProducts
+    getListProduits
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (ProductList)
