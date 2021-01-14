@@ -16,9 +16,7 @@ export class SignInAdmin extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-
-
-        axios.post('http://localhost:3003/admin/sign-in', {
+         axios.post('http://localhost:3003/admin/sign-in', {
             email: this.state.email,
             password: this.state.password,
         })

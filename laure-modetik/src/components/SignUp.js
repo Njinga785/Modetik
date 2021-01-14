@@ -35,6 +35,7 @@ export class SignUp extends Component {
                 this.setState({ message: "" })
 
             } catch (err) {
+                console.log('erreur sign up front-end')
                  this.setState({ message: "Email already registered" })
                
             }

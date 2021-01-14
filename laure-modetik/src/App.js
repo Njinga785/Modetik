@@ -10,6 +10,7 @@ import AddCategorie from './components/AddCategorie';
 import AddProduct from './components/AddProduct'; 
 // import HeaderAdmin from './components/HeaderAdmin';
 import Home from './components/Home';
+import ProductDescription from './components/ProductDescription';
 
 function App() {
   return ( 
@@ -25,6 +26,7 @@ function App() {
         <Route exact path='/sign-inAdmin' component={SignInAdmin}/>
         <Route exact path='/addcategorie' component={AddCategorie}/>
         <Route exact path='/addproduct' component={AddProduct}/>
+        <Route path='/:id' component={ProductDescription}/>
     
       </Switch>
     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Card from 'react-bootstrap/Card'
+import { Link } from 'react-router-dom'
 import CardGroup from 'react-bootstrap/CardGroup'
 import { connect } from 'react-redux'
 import { getListProduits } from './store/actions/actionProduits'
@@ -35,14 +36,14 @@ export class ProductList extends Component {
                 
                     <CardGroup style={{ width: '18rem' }} className="produit-list" key={produit.id}>
                         <Card  >
-                           
+                        <Link to={'/' + produit.id}>
                                 <Card.Img variant="top" src={produit.photo} width="286" height="180" alt="" />
                                 <Card.Body className="body">
                                     <Card.Title>{produit.nom}</Card.Title>
                                     <Card.Text>{produit.prix}</Card.Text> 
                                     
                                 </Card.Body>
-                            
+                                </Link>
                             
                         </Card> 
                         
