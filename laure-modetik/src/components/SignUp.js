@@ -10,88 +10,84 @@ export class SignUp extends Component {
             firstName: '',
             lastName: '',
             email: '',
-            profile: '',
             password: '',
-            message: ''
+            profile: ''
+
         }
-        // this.message = this.message.bind(this);
-        this.SignUp = this.SignUp.bind(this)
     }
 
 
-      
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log({
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            profile: this.state.profile
 
+        })
+        axios.post('http://localhost:3003/client/sign-up', {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            profile: this.state.profile
 
+        })
+            .then((response) => {
+                console.log(response)
 
-
-
-    async SignUp(e) {
-        e.preventDefault();
-        const target = e.target
-        if (e.target.firstName.value && e.target.lastName.value && e.target.email.value && e.target.password.value && e.target.profile.value) {
-            try {
-                this.setState({ firstName: e.target.firstName.value, lastName: e.target.lastName.value, email: e.target.email.value, password: e.target.password.value })
-                await axios.post("http://localhost:3003/clients/sign-up", { firstName: e.target.firstName.value, lastName: e.target.lastName.value, email: e.target.email.value, password: e.target.password.value, profile: e.target.profile.value })
-                this.setState({ message: "" })
-
-            } catch (err) {
-                console.log('erreur sign up front-end')
-                 this.setState({ message: "Email already registered" })
-               
-            }
-        } else {
-            this.setState({ message: "Sorry, one or more inputs are empty" })
-        }
-
-
-        target.firstName.value = ""
-        target.lastName.value = ""
-        target.email.value = ""
-        target.password.value = ""
-        target.profile.value = ""
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
-
-
+    handleChange = (e) => {
+        console.log(e.target.id, e.target.value)
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
     render() {
         return (
             <div>
-                <div className="form">
-                    <h1 className="titreForm">Sign-Up</h1>
-                    <Form onSubmit={this.SignUp}>
-                        <Form.Group controlId="firstName">
-                            <Form.Label>firstName:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter firstName" />
-                        </Form.Group>
+                <Form onSubmit={this.handleSubmit}>
 
-                        <Form.Group controlId="lastName">
-                            <Form.Label>lastName:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter lastName" />
-                        </Form.Group>
+                    <Form.Group controlId="firstName">
+                        <Form.Label htmlFor="firstName">First Name</Form.Label>
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="First Name" />
+                    </Form.Group>
 
-                        <Form.Group controlId="email">
-                            <Form.Label>Email address:</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        <Form.Group controlId="password">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-
-                        <Form.Group controlId="profile">
-                            <Form.Label>Profile:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter profile" />
-                        </Form.Group>
+                    <Form.Group controlId="lastName">
+                        <Form.Label htmlFor="lastName">Last Name</Form.Label>
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="Last Name" />
+                    </Form.Group>
 
 
+                    <Form.Group controlId="email">
+                        <Form.Label htmlFor="email">Email adress</Form.Label>
+                        <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" />
+                    </Form.Group> 
 
-                        <Button variant="primary" type="submit">
-                            Sign-Up
-                        </Button>
-                        <p className="error">{this.state.message}</p>
-                    </Form>
-                </div>
+
+                    <Form.Group controlId="password">
+                        <Form.Label htmlFor="password">Password</Form.Label>
+                        <Form.Control onChange={this.handleChange} type="password" placeholder="password" />
+                    </Form.Group>
+
+                    <Form.Group controlId="profile">
+                        <Form.Label htmlFor="profile">Profile Picture</Form.Label>
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" />
+                    </Form.Group>
+
+
+                   
+                    <Button variant="success" type="submit">
+                        Submit
+                    </Button>
+                </Form>
             </div>
         )
     }
