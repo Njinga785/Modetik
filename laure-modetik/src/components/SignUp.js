@@ -27,7 +27,7 @@ export class SignUp extends Component {
             profile: this.state.profile
 
         })
-        axios.post('http://localhost:3003/client/sign-up', {
+        axios.post('http://localhost:3003/clients/sign-up', {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
@@ -49,36 +49,44 @@ export class SignUp extends Component {
         this.setState({
             [e.target.id]: e.target.value
         })
+    } 
+
+    handleChangeEmail = (e) => {
+        if (e.target.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)!=null) {
+            this.setState({
+            email: e.target.value
+            })
+        }
     }
     render() {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
-
+                <h1 className="titreForm">Sign-Up</h1>
                     <Form.Group controlId="firstName">
-                        <Form.Label htmlFor="firstName">First Name</Form.Label>
+                        <Form.Label>First Name</Form.Label>
                         <Form.Control onChange={this.handleChange} type="text" placeholder="First Name" />
                     </Form.Group>
 
                     <Form.Group controlId="lastName">
-                        <Form.Label htmlFor="lastName">Last Name</Form.Label>
+                        <Form.Label>Last Name</Form.Label>
                         <Form.Control onChange={this.handleChange} type="text" placeholder="Last Name" />
                     </Form.Group>
 
 
                     <Form.Group controlId="email">
-                        <Form.Label htmlFor="email">Email adress</Form.Label>
-                        <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" />
+                        <Form.Label>Email adress</Form.Label>
+                        <Form.Control  onChange={this.handleChange, this.handleChangeEmail} type="email" placeholder="Enter email" />
                     </Form.Group> 
 
 
                     <Form.Group controlId="password">
-                        <Form.Label htmlFor="password">Password</Form.Label>
+                        <Form.Label>Password</Form.Label>
                         <Form.Control onChange={this.handleChange} type="password" placeholder="password" />
                     </Form.Group>
 
                     <Form.Group controlId="profile">
-                        <Form.Label htmlFor="profile">Profile Picture</Form.Label>
+                        <Form.Label>Profile Picture</Form.Label>
                         <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" />
                     </Form.Group>
 
