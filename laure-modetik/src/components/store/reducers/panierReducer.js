@@ -10,10 +10,10 @@ const paniersReducer = (state = initialState, action) => {
                 ...state,
                 paniers: action.paniers
             };
-        case "ADD-PANIER": 
+        case "ADD-TO-PANIER": 
             return {
                 ...state,
-                paniers: [...state.paniers, action.paniers]
+                paniers: [...state.paniers, action.id]
             }; 
             case "DELETE":
             let paniers = state.paniers.slice()

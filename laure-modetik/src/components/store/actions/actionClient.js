@@ -8,4 +8,5 @@ export const signIn = (token, firstName, email, id) => ({
 
 export const signOut = () => ({
     type: "SIGN-OUTCLIENT"
-})
+}) 
+ 

@@ -1,12 +1,12 @@
-export const getListPaniers = (paniers) => ({ 
+export const getListProduis = (produits) => ({ 
     
     type: "LIST-PANIERS",
-    paniers: paniers
+    produits: produits
 })
 
-export const addPanier = (panier) => ({
-    type: "ADD-PANIER",
-    panier: panier
+export const addToPanier = (id) => ({
+    type: "ADD-TO-PANIER",
+    id: id
 })   
 
 export const deletePanier = (id ) => ({

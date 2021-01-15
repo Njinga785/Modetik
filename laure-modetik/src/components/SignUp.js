@@ -11,7 +11,8 @@ export class SignUp extends Component {
             lastName: '',
             email: '',
             password: '',
-            profile: ''
+            profile: '', 
+            message: ''
 
         }
     }
@@ -56,6 +57,8 @@ export class SignUp extends Component {
             this.setState({
             email: e.target.value
             })
+        }else {
+            this.setState({message:'veuillez rentrez un email valide'})
         }
     }
     render() {
@@ -90,7 +93,7 @@ export class SignUp extends Component {
                         <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" />
                     </Form.Group>
 
-
+            
                    
                     <Button variant="success" type="submit">
                         Submit
