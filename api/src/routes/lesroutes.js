@@ -171,6 +171,42 @@ routes.post("/categorie", (req, res) => {
         res.status(403).send(err)
 
     }
+}) 
+
+routes.get("/produits", (req, res) => {
+    try {
+        db.query(`SELECT * FROM produits`, function (err, result) {
+            if (err) {
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Error")
+
+    }
+}) 
+
+
+routes.get("/produits/:id", (req, res) => {
+    try {
+        db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.id}`, function (err, result) {
+            if (err) {
+                console.log(err)
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Error")
+
+    }
 })
 
 routes.use("/produits", middlewares.isAdmin)
@@ -199,40 +235,9 @@ routes.post("/produits", (req, res) => {
 
 })
 
-routes.get("/produits", (req, res) => {
-    try {
-        db.query(`SELECT * FROM produits`, function (err, result) {
-            if (err) {
-                res.status(400).send("Error")
-            } else {
-                res.status(200).send(result)
-            }
-        })
 
-    } catch (err) {
-        console.log(err);
-        res.status(400).send("Error")
 
-    }
-})
 
-routes.get("/produits/:id", (req, res) => {
-    try {
-        db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.id}`, function (err, result) {
-            if (err) {
-                console.log(err)
-                res.status(400).send("Error")
-            } else {
-                res.status(200).send(result)
-            }
-        })
-
-    } catch (err) {
-        console.log(err);
-        res.status(400).send("Error")
-
-    }
-})
 
 
 routes.put("/produits/:id", async function (req, res) {
