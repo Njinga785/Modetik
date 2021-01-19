@@ -4,15 +4,16 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import jwt from "jsonwebtoken";
 import {connect} from 'react-redux' 
-import {signIn} from './store/actions/actionClient'
+import {SignInClients} from './store/actions/actionClient'
 
-export class SignInClients extends Component {
+export class SignIn extends Component {
     constructor() {
         super()
         this.state = {
             email: '',
             password: ''
-        }
+        } 
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleSubmit = (e) => {
         e.preventDefault()
@@ -32,7 +33,7 @@ export class SignInClients extends Component {
                       localStorage.setItem('firstName', decoded.firstName)
                       localStorage.setItem('token', decoded.email)
                      localStorage.setItem('email', decoded.id)
-                    this.props.signIn(response.data.token, decoded.firstName, decoded.email, decoded.id)
+                    this.props.SignInClients(response.data.token, decoded.firstName, decoded.email, decoded.id)
                     //  this.props.userProducts()
                     //   this.props.history.push('/')
                 } else {
@@ -60,12 +61,12 @@ export class SignInClients extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" />
+                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" required={true} />
                         </Form.Group>
 
                         <Form.Group controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" />
+                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required={true} />
                         </Form.Group>
 
                         <Button variant="success" type="submit">
@@ -80,7 +81,7 @@ export class SignInClients extends Component {
 } 
 
 const mapDispatchToProps = {
-    signIn 
+    SignInClients 
  }
 
-export default connect(null, mapDispatchToProps ) (SignInClients)
+export default connect(null, mapDispatchToProps ) (SignIn)

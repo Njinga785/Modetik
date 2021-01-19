@@ -10,4 +10,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} 
+
+.product-list {
+  margin: 1em;
+}
+.linear {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.title {
+  text-decoration: underline;
+  margin: 1em;
 }

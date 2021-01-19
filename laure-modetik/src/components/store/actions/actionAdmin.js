@@ -1,4 +1,4 @@
-export const signIn = (token, name, email, id) => ({
+export const SignIn = (token, name, email, id) => ({
     type: "SIGN-INADMIN",
     token: token,
     name: name,

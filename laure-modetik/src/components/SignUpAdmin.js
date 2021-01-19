@@ -49,27 +49,27 @@ export class SignUpAdmin extends Component {
             <Form onSubmit={this.SignUp}>
                 <Form.Group controlId="name">
                     <Form.Label>Name:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter name" />
+                    <Form.Control type="text" placeholder="Enter name" required={true} />
                 </Form.Group>
 
                 <Form.Group controlId="email">
                     <Form.Label>Email address:</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="email" placeholder="Enter email" required={true} />
                 </Form.Group>
 
                 <Form.Group controlId="password">
                     <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" required={true}/>
                 </Form.Group>
 
                 <Form.Group controlId="profile">
                     <Form.Label>Profile:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter profile" />
+                    <Form.Control type="text" placeholder="Enter profile" required={true} />
                 </Form.Group>
 
 
 
-                <Button variant="primary" type="submit">
+                <Button variant="success" type="submit">
                     Sign-UpAdmin
                 </Button>
                 <p className="error">{this.state.message}</p>

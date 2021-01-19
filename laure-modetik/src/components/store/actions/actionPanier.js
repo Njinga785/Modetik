@@ -9,7 +9,10 @@ export const addToPanier = (id) => ({
     id: id
 })   
 
-export const deletePanier = (id ) => ({
-    type: 'DELETE_PRODUCT',
+export const deleteFromPanier = (id ) => ({
+    type: "DELETE",
     id: id
-});
+}) 
+
+
+

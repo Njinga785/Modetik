@@ -14,6 +14,7 @@ const clientReducer = (state = initialState, action) => {
                 token: action.token,
                 firstName: action.firstName,
                 email: action.email,
+                profile: action.profile,
                 id: action.id
             };
         case "SIGN-OUTCLIENT": 
@@ -22,6 +23,7 @@ const clientReducer = (state = initialState, action) => {
                 token: "",
                 firstName: "",
                 email: "",
+                profile: "",
                 id: ""
                 
             }

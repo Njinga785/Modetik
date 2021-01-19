@@ -34,7 +34,7 @@ export class ProductDescription extends Component {
 
     render() {
         const produit = this.state.produit ? (
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '12rem' }}>
                 <Card.Img variant="top" src={this.state.produit.photo} />
                 <Card.Body>
                     <Card.Title>{this.state.produit.nom}</Card.Title>

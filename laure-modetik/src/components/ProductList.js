@@ -29,16 +29,16 @@ export class ProductList extends Component {
     render() {
         const produits=this.props.produits
         return (
-            <div>
+            <div className="linear">
             {produits && produits.map(produit => {
 
                 return ( 
                 
-                    <CardGroup style={{ width: '18rem' }} className="produit-list" key={produit.id}>
-                        <Card  >
+                    <CardGroup style={{ width: '18rem'}} className="product-list" key={produit.id}>
+                        <Card>
                         <Link to={'/' + produit.id}>
-                                <Card.Img variant="top" src={produit.photo} width="286" height="180" alt="" />
-                                <Card.Body className="body">
+                                <Card.Img variant="top" src={produit.photo} width="286" height="286" alt="" />
+                                <Card.Body>
                                     <Card.Title>{produit.nom}</Card.Title>
                                     <Card.Text>{produit.prix}</Card.Text> 
                                     

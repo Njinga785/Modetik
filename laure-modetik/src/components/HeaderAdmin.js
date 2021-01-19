@@ -27,7 +27,7 @@ export class HeaderAdmin extends Component {
                     <Nav.Link as={Link} to="/sign-up">SignUp</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} to="/sign-inClients">SigninClients</Nav.Link>
+                    <Nav.Link as={Link} to="/sign-in">Signin</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-upAdmin">SignUpAdmin</Nav.Link>

@@ -1,12 +1,18 @@
-export const signIn = (token, firstName, email, id) => ({
-    type: "SIGN-INCLIENT",
+export const SignInClients = (token, firstName, email, profile, id) => ({
+    type: "SIGN-INCLIENTS",
     token: token,
     firstName: firstName,
-    email: email,
+    email: email, 
+    profile: profile,
     id: id
 })
 
-export const signOut = () => ({
-    type: "SIGN-OUTCLIENT"
+export const signOutClients = () => ({
+    type: "SIGN-OUTCLIENTS"
 }) 
+
+export const clientProduits = (client_produits) => ({
+    type: "CLIENT_PRODUITS"
+})
  
+
