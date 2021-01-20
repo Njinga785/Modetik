@@ -18,7 +18,7 @@
 //     async validatedPart(){
         
     
-//         axios.post('http://localhost:3003/panier', {
+        // axios.post('http://localhost:3003/panier', {
 //            client_id: this.props.id, 
 //            produit_id: this.props.produit
 

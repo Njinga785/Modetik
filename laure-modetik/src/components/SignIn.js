@@ -28,11 +28,12 @@ export class SignIn extends Component {
                 let decoded = jwt.decode(response.data.token)
 
                 console.log(decoded)
-                if (decoded) {
-                    localStorage.setItem('id', response.data.token)
+                if (decoded) { 
+                    console.log('je suis bien dans le if')
+                    localStorage.setItem('token', response.data.token)
                       localStorage.setItem('firstName', decoded.firstName)
-                      localStorage.setItem('token', decoded.email)
-                     localStorage.setItem('email', decoded.id)
+                      localStorage.setItem('email', decoded.email)
+                     localStorage.setItem('id', decoded.id)
                     this.props.SignInClients(response.data.token, decoded.firstName, decoded.email, decoded.id)
                     //  this.props.userProducts()
                     //   this.props.history.push('/')

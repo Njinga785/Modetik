@@ -8,7 +8,7 @@ const initialState = {
 
 const clientReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SIGN-INCLIENT":
+        case "SIGN-INCLIENTS":
             return {
                 ...state,
                 token: action.token,
@@ -17,7 +17,7 @@ const clientReducer = (state = initialState, action) => {
                 profile: action.profile,
                 id: action.id
             };
-        case "SIGN-OUTCLIENT": 
+        case "SIGN-OUTCLIENTS": 
             return {
                 ...state, 
                 token: "",

@@ -14,7 +14,7 @@ export class ProductDescription extends Component {
         }
     } 
 
-    addToPanier(id){ 
+    addToPanier(){ 
         
         this.props.addToPanier(this.props.match.params.id)
     }
@@ -34,13 +34,14 @@ export class ProductDescription extends Component {
 
     render() {
         const produit = this.state.produit ? (
-            <Card style={{ width: '12rem' }}>
+            <Card style={{ width: '20rem', margin: 'auto'}}>
                 <Card.Img variant="top" src={this.state.produit.photo} />
                 <Card.Body>
                     <Card.Title>{this.state.produit.nom}</Card.Title>
                     <Card.Text>{this.state.produit.prix}</Card.Text> 
                     <Card.Text>{this.state.produit.description}</Card.Text>
-                    <Button id='button' onClick={() => this.addToPanier(this.state.id)} variant="success">AJOUTER AU PANIER</Button>
+                    {localStorage.getItem("token") && (<Button id='button' onClick={() => this.addToPanier()} variant="success">AJOUTER AU PANIER</Button>)}
+                    
                 </Card.Body>
             </Card>
 

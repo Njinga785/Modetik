@@ -65,28 +65,28 @@ export class AddProduct extends Component {
 
                         <Form.Group controlId="nom">
                             <Form.Label>Produit Nom</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Produit nom" />
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Produit nom" required/>
                         </Form.Group>
 
                         <Form.Group controlId="prix">
                             <Form.Label>Prix</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Prix" />
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Prix" required />
                         </Form.Group>
 
                         <Form.Group controlId="description">
                             <Form.Label>Description</Form.Label>
-                            <Form.Control onChange={this.handleChange} as="textarea" placeholder="Description" />
+                            <Form.Control onChange={this.handleChange} as="textarea" placeholder="Description" required />
                         </Form.Group>
 
                         <Form.Group controlId="photo">
                             <Form.Label>Photo</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Photo" />
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Photo" required />
                         </Form.Group>
 
 
                         <Form.Group controlId="categorie_id">
                             <Form.Label>Categotie</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie" />
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie" required/>
                         </Form.Group>
 
 
