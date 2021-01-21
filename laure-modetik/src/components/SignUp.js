@@ -74,18 +74,18 @@ export class SignUp extends Component {
                 <h1 className="titreForm">Sign-Up</h1>
                     <Form.Group controlId="firstName">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control onChange={this.handleChange} type="text" placeholder="First Name" required={true} />
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="First Name" required/>
                     </Form.Group>
 
                     <Form.Group controlId="lastName">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control onChange={this.handleChange} type="text" placeholder="Last Name" required={true} />
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="Last Name" required />
                     </Form.Group>
 
 
                     <Form.Group controlId="email">
                         <Form.Label>Email adress</Form.Label>
-                        <Form.Control  onChange={this.handleChange, this.handleChangeEmail} type="email" placeholder="Enter email" required={true}
+                        <Form.Control  onChange={this.handleChange, this.handleChangeEmail} type="email" placeholder="Enter email" required
                             pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
                              
                     </Form.Group> 
@@ -95,12 +95,12 @@ export class SignUp extends Component {
 
                     <Form.Group controlId="password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control onChange={this.handleChange} type="password" placeholder="password" required={true} />
+                        <Form.Control onChange={this.handleChange} type="password" placeholder="password" required/>
                     </Form.Group>
 
                     <Form.Group controlId="profile">
                         <Form.Label>Profile Picture</Form.Label>
-                        <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" required={true} />
+                        <Form.Control onChange={this.handleChange} type="text" placeholder="Picture" required/>
                     </Form.Group>
 
                         <div className="invalid-feedback d-block">

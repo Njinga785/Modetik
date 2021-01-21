@@ -49,22 +49,22 @@ export class SignUpAdmin extends Component {
             <Form onSubmit={this.SignUp}>
                 <Form.Group controlId="name">
                     <Form.Label>Name:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter name" required={true} />
+                    <Form.Control type="text" placeholder="Enter name" required />
                 </Form.Group>
 
                 <Form.Group controlId="email">
                     <Form.Label>Email address:</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required={true} />
+                    <Form.Control type="email" placeholder="Enter email" required />
                 </Form.Group>
 
                 <Form.Group controlId="password">
                     <Form.Label>Password:</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required={true}/>
+                    <Form.Control type="password" placeholder="Password" required/>
                 </Form.Group>
 
                 <Form.Group controlId="profile">
                     <Form.Label>Profile:</Form.Label>
-                    <Form.Control type="text" placeholder="Enter profile" required={true} />
+                    <Form.Control type="text" placeholder="Enter profile" required />
                 </Form.Group>
 
 

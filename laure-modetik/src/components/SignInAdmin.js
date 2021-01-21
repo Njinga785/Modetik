@@ -61,12 +61,12 @@ export class SignInAdmin extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" required={true} />
+                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" required />
                         </Form.Group>
 
                         <Form.Group controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required={true} />
+                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required/>
                         </Form.Group>
 
                         <Button variant="success" type="submit">

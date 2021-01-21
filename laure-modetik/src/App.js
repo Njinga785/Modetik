@@ -9,6 +9,7 @@ import SignUpAdmin from './components/SignUpAdmin';
 import AddCategorie from './components/AddCategorie';
 import AddProduct from './components/AddProduct'; 
 import ProtectedRoute from './components/ProtectedRoute'
+import Panier from './components/Panier'
 // import HeaderAdmin from './components/HeaderAdmin';
 import Home from './components/Home';
 import ProductDescription from './components/ProductDescription';
@@ -29,6 +30,7 @@ function App() {
         <Route exact path='/addcategorie' component={AddCategorie}/>
         <ProtectedRoute exact path='/addproduct' component={AddProduct}/>
         <Route exact path='/:id' component={ProductDescription}/>
+        <Route exact path='/panier' component={Panier}/>
         {/* <Route exact path='/clientProfile' component={ClientProfile}/> */}
     
       </Switch>
