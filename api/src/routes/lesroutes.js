@@ -60,35 +60,41 @@ routes.get("/clients", (req, res) => {
 
 //client/sign-in 
 
-routes.post("/clients/sign-in", (req, res) => {
-    const password = req.body.password
-    const email = req.body.email;
-    db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, function (err, result) {
-        console.log(result);
-        if (err) {
-            res.send('non')
-        } else {
-            if (result.length > 0) {
-                bcrypt.compare(password, result[0].password, function (error, results) {
-                    console.log(results)
-                    if (results === true) {
-                        let token = jwt.sign({ firstName: result[0].firstName, email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
-                        console.log(token)
-                        res.send({ token: token })
-                        console.log('your recognize')
-                    } else {
-                        console.log('who are you')
-                        console.log(results);
-                    }
 
-                })
+routes.post("/clients/sign-in", (req, res) => {
+    try {
+        if (!req.body.email) throw 'NO EMAIL'
+        if (!req.body.password) throw 'NO PASSWORD'
+        db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, function (err, result) {
+            console.log(result);
+            if (err) {
+                res.send('non')
             } else {
-                console.log('faux mail')
+                if (result.length > 0) {
+                    bcrypt.compare(req.body.password, result[0].password, function (error, results) {
+                        console.log(results)
+                        if (results === true) {
+                            let token = jwt.sign({ firstName: result[0].firstName, email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
+                            console.log(token)
+                            res.send({ token: token })
+                            console.log('your recognize')
+                        } else {
+                            console.log('who are you')
+                            console.log(results);
+                        }
+
+                    })
+                } else {
+                    console.log('faux mail')
+                }
+
             }
 
-        }
 
-    })
+        })
+    } catch (error) {
+        res.status(403).send(error)
+    }
 })
 
 //get/client/:id 
@@ -113,25 +119,62 @@ routes.get("/clients/:id", function (req, res) {
 //put/client/:id 
 
 
-routes.put("/clients/:id", async function (req, res) {
+// routes.put("/clients/:id", async function (req, res) {
 
-    try {
+//     try {
 
-        var password = await bcrypt.hash(req.body.password, saltRounds)
+//         var password = await bcrypt.hash(req.body.password, saltRounds)
 
 
-        db.query(`UPDATE clients SET firstName = '${req.body.firstName}', lastName = '${req.body.lastName}', email = '${req.body.email}', password = '${req.body.password}', profile = '${req.body.profile}' WHERE id = ${req.params.id}`, async function (err, results) {
+//         db.query(`UPDATE clients SET firstName = '${req.body.firstName}', lastName = '${req.body.lastName}', email = '${req.body.email}', password = '${req.body.password}', WHERE id = ${req.params.id}`, async function (err, results) {
+//             if (err) {
+//                 res.send(err)
+
+//             } else {
+//                 res.status(200).send("Updated")
+//             }
+
+//         })
+
+//     } catch (err) {
+//         res.status(400).send(err)
+//     }
+// }) 
+
+
+routes.put("/clients/:id", async function(req, res){
+    let profileUpdated = {
+        firstName: req.body.firstName,
+        email: req.body.email,       
+        // avatar: req.body.avatar,
+        password: await bcrypt.hash(req.body.password, saltRounds),
+        id: req.params.id
+    }
+    try{
+        db.query(`UPDATE clients SET firstName = ?, email = ?, WHERE id = ?`, [profileUpdated.firstName, profileUpdated.email, profileUpdated.id], async function(err, results) {
             if (err) {
-                res.send(err)
-
+                res.status(400).send("Error")
             } else {
-                res.status(200).send("Updated")
+
+                if (req.body.password) {
+                    
+                    db.query(`UPDATE clients SET password = ? WHERE id = ?`, [profileUpdated.password, profileUpdated.id], function(err) {
+                        if (err) {
+                            console.log(err);
+                            res.status(400).send("Error")
+                        } else {
+                            res.status(200).send("Updated")
+                        }
+                    })
+                } else {
+                    res.status(200).send("Updated")
+                }              
             }
-
-        })
-
-    } catch (err) {
-        res.status(400).send(err)
+        })     
+        
+       
+    } catch(err){
+        res.status(400).send("Error")
     }
 })
 
@@ -171,7 +214,7 @@ routes.post("/categorie", (req, res) => {
         res.status(403).send(err)
 
     }
-}) 
+})
 
 routes.get("/produits", (req, res) => {
     try {
@@ -188,12 +231,12 @@ routes.get("/produits", (req, res) => {
         res.status(400).send("Error")
 
     }
-}) 
+})
 
 
 routes.get("/produits/:id", (req, res) => {
     try {
-        db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.id}`, function (err, result) {
+        db.query(`SELECT * FROM produits WHERE id = ${req.params.id}`, function (err, result) {
             if (err) {
                 console.log(err)
                 res.status(400).send("Error")
@@ -285,7 +328,7 @@ routes.post("/admin/sign-up", (req, res) => {
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
         if (!req.body.profile) throw 'NO PROFILE'
-        
+
 
         bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -302,18 +345,21 @@ routes.post("/admin/sign-up", (req, res) => {
         res.status(403).send(err)
     }
 
-})
+}) 
+
+
 
 routes.post("/admin/sign-in", (req, res) => {
-    const password = req.body.password
-    const email = req.body.email;
+    try {
+        if (!req.body.email) throw 'NO EMAIL'
+        if (!req.body.password) throw 'NO PASSWORD'
     db.query(`SELECT * FROM admin WHERE email = '${req.body.email}'`, function (err, result) {
         console.log(result);
         if (err) {
             res.send('non')
         } else {
             if (result.length > 0) {
-                bcrypt.compare(password, result[0].password, function (error, results) {
+                bcrypt.compare(req.body.password, result[0].password, function (error, results) {
                     console.log(results)
                     if (results === true) {
                         let token = jwt.sign({ email: result[0].email, id: result[0].id, isAdmin: true }, config.secret, { expiresIn: 86400 });
@@ -332,9 +378,14 @@ routes.post("/admin/sign-in", (req, res) => {
 
         }
 
-    })
+    }) 
+} catch (error) {
+    res.status(403).send(error)
+}
+
 })
 
+routes.use("/panier", middlewares.tokenMiddleware)
 
 routes.post("/panier", (req, res) => {
     try {

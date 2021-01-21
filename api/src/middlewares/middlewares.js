@@ -8,13 +8,17 @@ const tokenMiddleware = (req, res, next) => {
 
     let token = req.headers.token
     console.log(req.headers);
-    let verifiedToken = jwt.verify(token, config.secret)
+    jwt.verify(token, config.secret, (err, decoded) => {
+        
+        if (decoded) { 
+            req.decoded = decoded
+            next()
+        } else {
+            res.status(403).send("Invalid token")
+        }
+    })
 
-    if (verifiedToken) {
-        next()
-    } else {
-        res.status(403).send("Invalid")
-    }
+    
 }
 
 const isAdmin = (req, res, next) => {
@@ -22,7 +26,7 @@ const isAdmin = (req, res, next) => {
      let token = req.headers.token
     jwt.verify(token, config.secret, (err, decoded) => {
 
-        if (decoded) {
+        if (decoded.isAdmin === true) {
             next()
         } else {
             res.status(403).send("your are not the admin")
