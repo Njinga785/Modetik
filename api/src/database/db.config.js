@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     user: 'root',
     password: '',
     database: "modetik",
-    port: 3308
+   //  port: 3308
 });
 
 connection.connect(function(error){

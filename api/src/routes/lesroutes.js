@@ -143,32 +143,36 @@ routes.get("/clients/:id", function (req, res) {
 
 
 routes.put("/clients/:id", async function(req, res){
-    let profileUpdated = {
-        firstName: req.body.firstName,
-        email: req.body.email,       
-        // avatar: req.body.avatar,
-        password: await bcrypt.hash(req.body.password, saltRounds),
-        id: req.params.id
-    }
+    const { firstName, email, password } = req.body
+    const pass = await bcrypt.hash(req.body.password, saltRounds)
+    const id = req.params.id
+    // // let profileUpdated = {
+    // //     firstName: req.body.firstName,
+    // //     email: req.body.email,       
+    // //     // avatar: req.body.avatar,
+    // //     password: ,
+    // //     id: 
+    // }
     try{
-        db.query(`UPDATE clients SET firstName = ?, email = ?, WHERE id = ?`, [profileUpdated.firstName, profileUpdated.email, profileUpdated.id], async function(err, results) {
+        db.query(`UPDATE clients SET firstName = '${firstName}', email = '${email}', password = '${pass}' WHERE id = id`, async function(err, results) {
             if (err) {
                 res.status(400).send("Error")
             } else {
+                res.status(200).send("Updated")
 
-                if (req.body.password) {
+                // if (req.body.password) {
                     
-                    db.query(`UPDATE clients SET password = ? WHERE id = ?`, [profileUpdated.password, profileUpdated.id], function(err) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send("Error")
-                        } else {
-                            res.status(200).send("Updated")
-                        }
-                    })
-                } else {
-                    res.status(200).send("Updated")
-                }              
+                //     db.query(`UPDATE clients SET password = ? WHERE id = ?`, [profileUpdated.password, profileUpdated.id], function(err) {
+                //         if (err) {
+                //             console.log(err);
+                //             res.status(400).send("Error")
+                //         } else {
+                            
+                //         }
+                    // })
+                // } else {
+                //     res.status(200).send("Updated")
+                // }              
             }
         })     
         
@@ -212,6 +216,44 @@ routes.post("/categorie", (req, res) => {
     } catch (err) {
         console.log(err)
         res.status(403).send(err)
+
+    }
+}) 
+
+routes.post("/contact", (req, res) => {
+    try {
+        if (!req.body.nom) throw 'NO NAME'
+        if (!req.body.email) throw 'NO EMAIL'
+        if (!req.body.message) throw 'NO MESSAGE'
+
+        var sql = `INSERT INTO contact (nom, email, message) VALUES ('${req.body.nom}', '${req.body.email}', '${req.body.m}')`;
+        db.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log(result)
+            res.send(result)
+        });
+
+    } catch (err) {
+        console.log(err)
+        res.status(403).send(err)
+
+    }
+}) 
+
+
+routes.get("/contact", (req, res) => {
+    try {
+        db.query(`SELECT * FROM contact`, function (err, result) {
+            if (err) {
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Error")
 
     }
 })

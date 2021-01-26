@@ -53,7 +53,7 @@ export class AddCategorie extends Component {
                     <Form.Row>
                         <Form.Group controlId="categorieNom">
                             <Form.Label>Categorie Nom</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie Nom" resquired />
+                            <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie Nom" required />
                         </Form.Group>
                     </Form.Row>
 

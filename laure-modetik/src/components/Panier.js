@@ -37,7 +37,7 @@ export class Panier extends Component {
 
     
     render() { 
-        let produits = this.props.produits
+        // let produits = this.props.produits
         
         // let panier = this.props.panier
         

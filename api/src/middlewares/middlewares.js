@@ -37,7 +37,7 @@ const isAdmin = (req, res, next) => {
 }
 
 const emailMiddleware = (req, res, next) => {
-    // console.log(req.headers);
+    
 
 
     db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {

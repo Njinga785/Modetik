@@ -13,7 +13,8 @@ import Panier from './components/Panier'
 // import HeaderAdmin from './components/HeaderAdmin';
 import Home from './components/Home';
 import ProductDescription from './components/ProductDescription';
-// import ClientProfile from './components/ClientProfile';
+import Contact from './components/Contact';
+import ClientProfile from './components/ClientProfile';
 
 function App() {
   return ( 
@@ -28,10 +29,11 @@ function App() {
         <Route exact path='/sign-upAdmin' component={SignUpAdmin}/> 
         <Route exact path='/sign-inAdmin' component={SignInAdmin}/>
         <Route exact path='/addcategorie' component={AddCategorie}/>
+        <Route exact path='/contact' component={Contact}/>
         <ProtectedRoute exact path='/addproduct' component={AddProduct}/>
         <Route exact path='/:id' component={ProductDescription}/>
         <Route exact path='/panier' component={Panier}/>
-        {/* <Route exact path='/clientProfile' component={ClientProfile}/> */}
+        { <Route exact path='/clientProfile' component={ClientProfile}/> }
     
       </Switch>
     
