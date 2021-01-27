@@ -6,8 +6,9 @@ const db = require("../database/db.config.js")
 
 const tokenMiddleware = (req, res, next) => {
 
-    let token = req.headers.token
-    console.log(req.headers);
+    let token = req.headers.authorization
+    console.log(req.headers.authorization);
+    token = token.split(' ')[1]
     jwt.verify(token, config.secret, (err, decoded) => {
         
         if (decoded) { 
@@ -23,7 +24,8 @@ const tokenMiddleware = (req, res, next) => {
 
 const isAdmin = (req, res, next) => {
     console.log("TEST +> ", req);
-     let token = req.headers.token
+     let token = req.headers.authorization 
+     token = token.split(' ')[1]
     jwt.verify(token, config.secret, (err, decoded) => {
 
         if (decoded.isAdmin === true) {

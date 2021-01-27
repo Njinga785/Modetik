@@ -431,24 +431,54 @@ routes.use("/panier", middlewares.tokenMiddleware)
 
 routes.post("/panier", (req, res) => {
     try {
-        if (!req.body.date) throw 'NO DATE'
-        if (!req.body.total) throw 'NO TOTAL'
-        if (!req.body.client_id) throw 'NO CLIENT'
-        console.log(req.body)
+        console.log(req.body);
+        console.log("--------------"); 
+        console.log(req.decoded)
+        // if (!req.body.date) throw 'NO DATE'
+        //if (!req.body.total) throw 'NO TOTAL'
+        //if (!req.body.client_id) throw 'NO CLIENT'
 
-        var sql = `INSERT INTO panier (date, total, client_id) VALUES ('${req.body.date}', '${req.body.total}', ${parseInt(req.body.client_id)})`;
+        var sql = `INSERT INTO panier (total, client_id) VALUES ('${req.body.total}', ${req.decoded.id})`;
         db.query(sql, function (err, result) {
             if (err) throw err;
-            console.log(result)
-            res.send(result)
+            console.log(result) 
+            // créer une boucle qui parcours mon panier 
+            // let panier = req.body
+          for (var i = 0; i < req.body.panier.length; i++) {
+          var item =  `INSERT INTO panieritem (panier_id, produit_id, quantité) VALUES('${result.insertId}', '${req.body.panier[i]}', '${req.body.quantité}')`
+            db.query(item, function (err, res) {
+                if (err) throw err 
+                console.log(res)
+            }) 
+        }  
+          res.send(result)
+
         });
 
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         res.status(403).send(err)
     }
 
+}) 
+
+routes.get("/panier", (req, res) => {
+    try {
+        console.log("/GET")
+        db.query(`SELECT * FROM panier`, function (err, result) {
+            if (err) {
+                res.status(400).send("Error")
+            } else {
+                res.status(200).send(result)
+            }
+        })
+
+    } catch (err) {
+        // console.log(err);
+        res.status(400).send("Error")
+
+    }
 })
 
 
