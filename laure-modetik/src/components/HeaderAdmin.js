@@ -28,6 +28,9 @@ export class HeaderAdmin extends Component {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-in">Signin</Nav.Link>
+                </Nav.Item> 
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/profile">ClientProfile</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-upAdmin">SignUpAdmin</Nav.Link>
@@ -47,9 +50,7 @@ export class HeaderAdmin extends Component {
                 <Nav.Item>
                     <Nav.Link as={Link} to="/panier">Panier</Nav.Link>
                 </Nav.Item> 
-                <Nav.Item>
-                    <Nav.Link as={Link} to="/profile">ClientProfile</Nav.Link>
-                </Nav.Item>
+                
 
 
             </Nav>

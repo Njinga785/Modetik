@@ -30,10 +30,11 @@ function App() {
         <Route exact path='/sign-inAdmin' component={SignInAdmin}/>
         <Route exact path='/addcategorie' component={AddCategorie}/>
         <Route exact path='/contact' component={Contact}/>
-        <ProtectedRoute exact path='/addproduct' component={AddProduct}/>
-        <Route exact path='/:id' component={ProductDescription}/>
+        <Route exact path='/profile' component={ClientProfile}/> 
+        <ProtectedRoute exact path='/addproduct' component={AddProduct}/> 
         <Route exact path='/panier' component={Panier}/>
-        { <Route exact path='/clientProfile' component={ClientProfile}/> }
+        <Route exact path='/:id' component={ProductDescription}/>
+        
     
       </Switch>
     

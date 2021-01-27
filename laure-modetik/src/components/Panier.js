@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Table from 'react-bootstrap/Table';
@@ -13,14 +13,23 @@ export class Panier extends Component {
             // date: '',
             // client_id: ''
         }
-    } 
+    }
 
-    async validatedPart(){
-        
-    
-        axios.post('http://localhost:3003/panier', {headers: {token: this.props.token},
+    async validatedPart() {
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${this.props.token}`
+        // }
+        const articles = {
+            panier: this.props.panier 
+
+        }
+        console.log(this.props.panier )
+        axios.post('http://localhost:3003/panier', articles, { headers : { authorization: `Bearer ${this.props.token}`}
             
-           produit_id: this.props.produit
+
+            //produit_id: this.props.produit
+            //    panier: this.props.panier
 
         })
             .then((response) => {
@@ -30,17 +39,31 @@ export class Panier extends Component {
             .catch((err) => {
                 console.log(err)
             })
-        
-        
-    }
-    
 
-    
-    render() { 
+
+    }
+    componentDidMount() {
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${this.props.token}`
+        // }
+        axios.get('http://localhost:3003/panier', { headers : { authorization: `Bearer ${this.props.token}`}})
+            .then((response) => {
+                console.log(response)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    }
+
+
+    render() {
         // let produits = this.props.produits
-        
+
         // let panier = this.props.panier
-        
+
         // let produitPanier = []
 
         // for (let produit of produits) {
@@ -50,13 +73,13 @@ export class Panier extends Component {
         //         }
         //     }            
         // }
-      
-        
+
+
         // let panierMaped = []
         // let total = 0
 
         // for (let i = 0; i<produitPanier.length; i++) {
-            
+
         //         panierMaped.push(<tr>
         //             <td>{produitPanier[i].nom}</td>
         //             <td>{produitPanier[i].description}</td>
@@ -64,25 +87,25 @@ export class Panier extends Component {
         //             <td><img className="images" src={produitPanier[i].photo}/></td>
         //             <td>{produitPanier[i].prix}€</td>                
         //         </tr>)   
-            
-            
-            
+
+
+
         //     let prix
 
-            
+
         //         prix = produitPanier[i].prix
-            
-            
+
+
 
         //     prix = parseFloat(prix)
-            
-            
+
+
         //     total = total + prix
         // }
 
         return (
             <div>
-                
+
                 <Table>
                     <thead>
                         <tr>
@@ -90,38 +113,38 @@ export class Panier extends Component {
                             <th>Description</th>
                             <th>Photo</th>
                             <th>Prix</th>
-                           
-                            
+
+
                         </tr>
                     </thead>
 
                     {/* <tbody>
                     {panierMaped}
                     </tbody> */}
-            </Table>
-{/* 
+                </Table>
+                {/* 
             <p>Total: {total}€ </p> */}
-            <Button variant="success">Order</Button>
-           
+                <Button variant="success" onClick={() => this.validatedPart()}>Order</Button>
+
             </div>
         )
     }
 
 
 
-} 
+}
 
 const mapStateToProps = (state) => ({
-    // panier: state.panierReducer.panier,
+    panier: state.panierReducer.paniers,
     produits: state.produitsReducer.produits,
     token: state.clientReducer.token
-    
-    
-    
-})  
+
+
+
+})
 const mapDispatchToProps = {
     // SignInClients 
- }
+}
 
 
-export default connect(mapStateToProps, mapDispatchToProps) (Panier)
+export default connect(mapStateToProps, mapDispatchToProps)(Panier)
