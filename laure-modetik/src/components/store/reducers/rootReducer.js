@@ -2,6 +2,7 @@ import adminReducer from './adminReducer'
 import clientReducer from './clientReducer'
 import panierReducer from './panierReducer'
 import produitsReducer from './produitsReducer' 
+
 import {combineReducers} from 'redux'  
 
 const rootReducer = combineReducers({
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
     clientReducer,
     panierReducer,
     produitsReducer, 
+    
     
 }) 
 

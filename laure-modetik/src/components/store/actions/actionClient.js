@@ -5,6 +5,14 @@ export const SignInClients = (token, firstName, email, profile, id) => ({
     email: email, 
     profile: profile,
     id: id
+}) 
+
+export const updateProfile = (firstName, lastName, email, password) => ({
+    type: 'UPDATE_PROFILE', 
+    firstName: firstName, 
+    lastName: lastName, 
+    email: email, 
+    password: password
 })
 
 export const signOutClients = () => ({

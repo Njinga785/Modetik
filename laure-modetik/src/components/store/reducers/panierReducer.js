@@ -13,7 +13,7 @@ const paniersReducer = (state = initialState, action) => {
         case "ADD-TO-PANIER": 
             return {
                 ...state,
-                paniers: [...state.paniers, action.id]
+                paniers: [...state.paniers,{id: action.id, quantite: action.quantite} ]
             }; 
             case "DELETE":
             let paniers = state.paniers.slice()

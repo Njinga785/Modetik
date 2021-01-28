@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import jwt from "jsonwebtoken";
-import {connect} from 'react-redux' 
-import {SignInClients} from './store/actions/actionClient'
+import { connect } from 'react-redux'
+import { SignInClients } from './store/actions/actionClient'
 
 export class SignIn extends Component {
     constructor() {
@@ -12,7 +12,7 @@ export class SignIn extends Component {
         this.state = {
             email: '',
             password: ''
-        } 
+        }
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     handleSubmit = (e) => {
@@ -24,19 +24,19 @@ export class SignIn extends Component {
             password: this.state.password,
         })
             .then((response) => {
-                
+
                 let decoded = jwt.decode(response.data.token)
 
                 console.log(decoded)
-                if (decoded) { 
+                if (decoded) {
                     console.log('je suis bien dans le if')
                     localStorage.setItem('token', response.data.token)
-                      localStorage.setItem('firstName', decoded.firstName)
-                      localStorage.setItem('email', decoded.email)
-                     localStorage.setItem('id', decoded.id)
+                    localStorage.setItem('firstName', decoded.firstName)
+                    localStorage.setItem('email', decoded.email)
+                    localStorage.setItem('id', decoded.id)
                     this.props.SignInClients(response.data.token, decoded.firstName, decoded.email, decoded.id)
                     //  this.props.userProducts()
-                    //   this.props.history.push('/')
+                     this.props.history.push('/profile/' + decoded.id)
                 } else {
 
                     console.log('acces interdit')
@@ -62,12 +62,12 @@ export class SignIn extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" required/>
+                            <Form.Control onChange={this.handleChange} type="email" placeholder="Enter email" required />
                         </Form.Group>
 
                         <Form.Group controlId="password">
                             <Form.Label>Password:</Form.Label>
-                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required/>
+                            <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required />
                         </Form.Group>
 
                         <Button variant="success" type="submit">
@@ -79,10 +79,10 @@ export class SignIn extends Component {
             </div>
         )
     }
-} 
+}
 
 const mapDispatchToProps = {
-    SignInClients 
- }
+    SignInClients
+}
 
-export default connect(null, mapDispatchToProps ) (SignIn)
+export default connect(null, mapDispatchToProps)(SignIn)

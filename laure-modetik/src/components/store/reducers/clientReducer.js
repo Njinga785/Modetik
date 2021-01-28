@@ -26,7 +26,16 @@ const clientReducer = (state = initialState, action) => {
                 profile: "",
                 id: ""
                 
-            }
+            }; 
+            case "UPDATE_PROFILE":
+            return {
+                ...state,
+                firstName: action.firstName, 
+                lastName: action.lastName,
+                email: action.email,
+                password: action.password
+                
+            };
         
         default: {
             return {

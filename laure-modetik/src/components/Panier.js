@@ -21,7 +21,8 @@ export class Panier extends Component {
         //     'Authorization': `Bearer ${this.props.token}`
         // }
         const articles = {
-            panier: this.props.panier 
+            panier: this.props.panier, 
+            quantite: this.props.quantite
 
         }
         console.log(this.props.panier )
@@ -60,9 +61,11 @@ export class Panier extends Component {
 
 
     render() {
-        // let produits = this.props.produits
+         let produits = this.props.produits
 
-        // let panier = this.props.panier
+        let panier = this.props.panier 
+        
+        
 
         // let produitPanier = []
 
@@ -137,7 +140,8 @@ export class Panier extends Component {
 const mapStateToProps = (state) => ({
     panier: state.panierReducer.paniers,
     produits: state.produitsReducer.produits,
-    token: state.clientReducer.token
+    token: state.clientReducer.token, 
+    quantite: state.panierRe.quantite
 
 
 
