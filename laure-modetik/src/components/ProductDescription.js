@@ -4,20 +4,23 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
 import { connect } from "react-redux"
 import {addToPanier} from './store/actions/actionPanier'
+// import PanierItem from './PanierItem';
 
 export class ProductDescription extends Component {
     constructor() {
         super()
         this.state = {
-           produit: []
-            // id:this.props.match.params.id
+           produit: [], 
+           panierItem: []
+            
         }
     } 
-
-    addToPanier(){ 
-        
-        this.props.addToPanier(this.props.match.params.id)
+    
+    handleAddToPanier = (id) => {
+        this.props.addToPanier(id)
     }
+        // this.props.addToPanier({id: this.props.match.params.id, quantite: 1})
+    
     componentDidMount() {
         let id = this.props.match.params.id
         console.log(id)
@@ -40,7 +43,7 @@ export class ProductDescription extends Component {
                     <Card.Title>{this.state.produit.nom}</Card.Title>
                     <Card.Text>{this.state.produit.prix}</Card.Text> 
                     <Card.Text>{this.state.produit.description}</Card.Text>
-                    <p>  {localStorage.getItem("token") && (<Button id='button' onClick={() => this.addToPanier()} variant="success">AJOUTER AU PANIER</Button>)} 1</p>
+                    <p>  {localStorage.getItem("token") && (<Button id='button' onClick={() => this.handleAddToPanier(this.state.produit.id)} variant="success">AJOUTER AU PANIER</Button>)} </p>
                     
                 </Card.Body>
             </Card>

@@ -23,4 +23,11 @@ code {
 .title {
   text-decoration: underline;
   margin: 1em;
+} 
+
+/* filter */ 
+
+.filter {
+  display: flex; 
+  justify-content: space-between;
 }

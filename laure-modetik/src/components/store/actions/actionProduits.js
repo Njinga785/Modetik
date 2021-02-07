@@ -13,4 +13,10 @@ export const addProduit = (produit) => ({
 export const deleteProcduits = (id ) => ({
     type: 'DELETE_PRODUIT',
     id: id
-});
+}); 
+
+export const getCategorie = (id, categorieNom) => ({
+    type: 'GET_CATEGORY', 
+    id: id, 
+    categorieNom: categorieNom
+})

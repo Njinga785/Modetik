@@ -14,7 +14,7 @@ class ProtectedRoute extends Component {
             return <Redirect to={{pathname: '/'}}/>
         }
 
-        return token ? (<Component/>) : (<Redirect to={{pathname:'/'}}/>);
+        // return token ? (<Component/>) : (<Redirect to={{pathname:'/'}}/>);
     }
 }
 

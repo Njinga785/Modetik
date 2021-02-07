@@ -34,6 +34,9 @@ export class HeaderAdmin extends Component {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-upAdmin">SignUpAdmin</Nav.Link>
+                </Nav.Item> 
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/filter">Filter</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-inAdmin">SignInAdmin</Nav.Link>

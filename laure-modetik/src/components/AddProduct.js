@@ -34,11 +34,12 @@ export class AddProduct extends Component {
             categorie_id: this.state.categorie_id,
             admin_id: localStorage.getItem('id')
         },
-            {
-                headers: {
-                    token: localStorage.getItem('token')
+            { 
+                headers : { authorization: `Bearer ${localStorage.getItem('token')}`}
+                // headers: {
+                //     token: localStorage.getItem('token')
 
-                }
+                // }
             })
             .then((response) => {
                 console.log(response)

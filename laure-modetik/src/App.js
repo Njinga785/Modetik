@@ -15,6 +15,7 @@ import Home from './components/Home';
 import ProductDescription from './components/ProductDescription';
 import Contact from './components/Contact';
 import ClientProfile from './components/ClientProfile';
+import Filter from './components/Filter'
 
 function App() {
   return ( 
@@ -30,6 +31,7 @@ function App() {
         <Route exact path='/sign-inAdmin' component={SignInAdmin}/>
         <Route exact path='/addcategorie' component={AddCategorie}/>
         <Route exact path='/contact' component={Contact}/>
+        <Route exact path='/filter' component={Filter}/>
         <Route exact path='/profile/:id' component={ClientProfile}/> 
         <ProtectedRoute exact path='/addproduct' component={AddProduct}/> 
         <Route exact path='/panier' component={Panier}/>

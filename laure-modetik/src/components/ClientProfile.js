@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
-import YourProfile from "./YourProfile";
-import jwt from "jsonwebtoken";
+// import YourProfile from "./YourProfile";
+// import jwt from "jsonwebtoken";
 import {connect} from 'react-redux' 
 import {updateProfile} from './store/actions/actionClient'
-import clientReducer from './store/reducers/clientReducer';
+// import clientReducer from './store/reducers/clientReducer';
 
 
 
