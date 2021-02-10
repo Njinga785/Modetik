@@ -13,6 +13,12 @@ export const updateProfile = (firstName, lastName, email, password) => ({
     lastName: lastName, 
     email: email, 
     password: password
+}) 
+
+export const getListPanier = (paniers) => ({ 
+    
+    type: "LIST-PANIERS",
+    paniers: paniers
 })
 
 export const signOutClients = () => ({

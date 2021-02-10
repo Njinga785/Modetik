@@ -11,12 +11,14 @@ export class ProductDescription extends Component {
         super()
         this.state = {
            produit: [], 
-           panierItem: []
+           panierItem: [], 
+           quantite: 1
             
         }
     } 
     
-    handleAddToPanier = (id) => {
+    handleAddToPanier = (id) => { 
+       
         this.props.addToPanier(id)
     }
         // this.props.addToPanier({id: this.props.match.params.id, quantite: 1})

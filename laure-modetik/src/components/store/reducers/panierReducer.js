@@ -1,8 +1,6 @@
-// import { LIST-PRODUITS } from './actions/actionProduits'
-
 const initialState = {
     // paniers: [],
-    // produits: [],
+    // numberPanier: 0,
     addedProduits: [],
     // quantite: 1,
     // total: 0
@@ -10,18 +8,19 @@ const initialState = {
 
 
 const paniersReducer = (state = initialState, action) => {
-    switch (action.type) {
-        // case "LIST-PANIERS":
-        //     return {
-        //         ...state,
-        //         paniers: action.paniers
-        //     };
+    switch (action.type) { 
+        
+        case "GET_NUMBER_PANIER": 
+        return {
+            ...state
+        };
+        
         case "ADD-TO-PANIER":
             // let addedProduit = state.produits.find(produit => produit.id === action.id)
             let existed_produit = state.addedProduits.find(produit => action.id === produit.id)
 
             if (existed_produit) { 
-                // addedProduit = []
+                
                 existed_produit.quantite += 1
                 return {
                     ...state,
@@ -30,9 +29,9 @@ const paniersReducer = (state = initialState, action) => {
             }
             else {  
                 let newProduit = {id: action.id, quantite: 1}
-                // addedProduit = []
+                
                 // existed_produit.quantite = null;
-                // let newTotal = state.total + addedProduit.price
+                // let newTotal = state.total + newProduit.price
 
                 return {
                     ...state,
@@ -40,14 +39,42 @@ const paniersReducer = (state = initialState, action) => {
                     // total: newTotal
                 }
             };
-        // case "DELETE":
-        //     let paniers = state.paniers.slice()
-        //     for (let i = 0; i < paniers.length; i++) {
-        //         if (paniers[i].panier_id === action.id) {
-        //             paniers.splice(i, 1)
-        //         }
-        //     }
-        //     return { ...state, paniers: paniers }
+
+            case "REMOVE_PRODUIT":
+                // let produitToRemove= state.addedProduits.find(produit=> action.id === produit.id)
+        let new_produits = state.addedProduits.filter(produit=> action.id !== produit.id) 
+
+        return{
+            ...state,
+            addedProduits: new_produits,
+            // total: newTotal
+        }; 
+
+        case "ADD_QUANTITE":
+            let added_Produit = state.addedProduits.find(produit=> produit.id === action.id)
+            if (added_Produit) {
+          added_Produit.quantite++ 
+        //   let newTotal = state.total + addedItem.price
+          return{
+            ...state, addedProduits: [...state.addedProduits]
+            //   total: newTotal 
+        }
+          }; 
+          break
+          case "SUB_QUANTITE": 
+          let produitadd = state.addedProduits.find(produit=> produit.id === action.id) 
+        //if the qt == 0 then it should be removed 
+        if (produitadd) 
+        produitadd.quantite-- 
+        return{
+            ...state, addedProduits: [...state.addedProduits]
+        }; 
+
+        case "CLEAR_PANIER": 
+        return {
+            addedProduits: []
+        }
+        
         default: {
             return state
 

@@ -1,7 +1,6 @@
-export const getListPanier = (paniers) => ({ 
-    
-    type: "LIST-PANIERS",
-    paniers: paniers
+export const getNumberPanier = (id) => ({
+    type: "GET_NUMBER_PANIER",
+    id: id
 })
 
 export const addToPanier = (id) => ({
@@ -13,10 +12,26 @@ export const addToPanier = (id) => ({
     // quantite: quantite
 })   
 
-export const deleteFromPanier = (id ) => ({
-    type: "DELETE",
+export const removeProduit = (id ) => ({
+    type: "REMOVE_PRODUIT",
     id: id
 }) 
+
+export const addQuantite = (id) => ({
+    type: "ADD_QUANTITE",
+    id: id, 
+    
+})
+
+export const subtractQuantite = (id, quantite ) => ({
+    type: "SUB_QUANTITE",
+    id: id,
+    quantite: quantite
+}) 
+
+export const clearPanier = () => ({
+    type: "CLEAR_PANIER"
+})
 
 
 
