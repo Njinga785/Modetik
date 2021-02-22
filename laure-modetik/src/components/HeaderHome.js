@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 // import { NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
-import HeaderAdmin from './HeaderAdmin'
-// import HeaderClient from './HeaderClients'
+ import HeaderAdmin from './HeaderAdmin'
+// import Header from './Header'
+// import { HeaderAdmin } from './HeaderAdmin'
 // import Nav from 'react-bootstrap/Nav';
 // import '../style/Header.css'
 

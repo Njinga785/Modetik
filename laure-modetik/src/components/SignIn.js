@@ -30,13 +30,13 @@ export class SignIn extends Component {
                 console.log(decoded)
                 if (decoded) {
                     console.log('je suis bien dans le if')
-                    localStorage.setItem('token', response.data.token)
+                    localStorage.setItem('tokenClient', response.data.token)
                     localStorage.setItem('firstName', decoded.firstName)
                     localStorage.setItem('email', decoded.email)
                     localStorage.setItem('id', decoded.id)
                     this.props.SignInClients(response.data.token, decoded.firstName, decoded.email, decoded.id)
                     //  this.props.userProducts()
-                     this.props.history.push('/profile/' + decoded.id)
+                    this.props.history.push('/mespaniers')
                 } else {
 
                     console.log('acces interdit')

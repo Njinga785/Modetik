@@ -20,14 +20,13 @@ export class AddCategorie extends Component {
 
         axios.post(`http://localhost:3003/categorie`, {
             categorieNom: this.state.categorieNom,
-            // admin_id: localStorage.getItem('id')
-        })
-            // {
-            //     headers: {
-            //         token: localStorage.getItem('token')
+            admin_id: localStorage.getItem('id')
+        },
+            {
+                headers: { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}` }
 
-            //     }
-            // })
+
+            })
             .then((response) => {
                 console.log(response)
                 // this.props.addProduct()
@@ -48,7 +47,7 @@ export class AddCategorie extends Component {
     render() {
         return (
             <div>
-            <h1 className="titreForm">ADD-CATEGORIE</h1>
+                <h1 className="titreForm">ADD-CATEGORIE</h1>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
                         <Form.Group controlId="categorieNom">

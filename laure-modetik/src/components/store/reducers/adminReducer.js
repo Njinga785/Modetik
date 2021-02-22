@@ -2,7 +2,8 @@ const initialState = {
     token: "",
     name: "",
     email: "",
-    id: ""
+    id: "",
+    admin_products: [],
     
 }
 
@@ -25,7 +26,23 @@ const adminReducer = (state = initialState, action) => {
                 id: ""
                 
             }
-        
+            case "ADMIN-PRODUCTS":
+                return {
+                    ...state,
+                    admin_products: [...state.admin_products, action.admin_products]
+                }
+            case "DELETE":
+                let products = state.admin_products.slice()
+                for(let i = 0; i < products.length; i++){
+                    if(products[i].product_id === action.id){
+                        products.splice(i,1)
+                    }
+                }
+                return {
+                    ...state,
+                    admin_products : products
+                    
+                }
         default: {
             return state
                 

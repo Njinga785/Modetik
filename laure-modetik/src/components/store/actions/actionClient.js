@@ -1,9 +1,12 @@
-export const SignInClients = (token, firstName, email, profile, id) => ({
+
+
+
+export const SignInClients = (token, firstName, email, id) => ({
     type: "SIGN-INCLIENTS",
     token: token,
     firstName: firstName,
     email: email, 
-    profile: profile,
+    
     id: id
 }) 
 
@@ -12,21 +15,23 @@ export const updateProfile = (firstName, lastName, email, password) => ({
     firstName: firstName, 
     lastName: lastName, 
     email: email, 
-    password: password
-}) 
-
-export const getListPanier = (paniers) => ({ 
+    password: password, 
     
-    type: "LIST-PANIERS",
-    paniers: paniers
-})
+}) 
 
 export const signOutClients = () => ({
     type: "SIGN-OUTCLIENTS"
 }) 
 
-export const clientProduits = (client_produits) => ({
-    type: "CLIENT_PRODUITS"
+export const panierClient = (panier_client) => ({ 
+    
+    type: "PANIER-CLIENT",
+    panier_client: panier_client
+})
+
+export const deletePanierClient = (id) => ({
+    type: "DELETE", 
+    id: id
 })
  
 

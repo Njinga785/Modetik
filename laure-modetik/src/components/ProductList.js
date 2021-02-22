@@ -19,7 +19,7 @@ export class ProductList extends Component {
 
     }
     componentDidMount() {
-        axios.get('http://localhost:3003/produits')
+        axios.get('http://localhost:3003/produits', { headers: { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}` }})
             .then((response) => {
 
                 console.log(response.data)
@@ -61,17 +61,18 @@ export class ProductList extends Component {
         } 
     }
         render() {
-
+            // let id = this.state.produit.id
             const produits = this.state.filteredProduits.length? this.state.filteredProduits: this.props.produits
-
-            return (
+            // console.log(produits)
+            return ( 
+                
                 <div>
                     <Filter count={produits.length}
                         categorie={this.state.categorie}
                         filterProduits={this.filterProduits}></Filter>
                     <div className="linear">
                         {produits && produits.map(produit => {
-
+                            
                             return (
 
                                 <CardGroup style={{ width: '18rem' }} className="product-list" key={produit.id}>

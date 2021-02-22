@@ -1,5 +1,5 @@
 const initialState = {
-    // paniers: [],
+    //  paniers: [],
     // numberPanier: 0,
     addedProduits: [],
     // quantite: 1,
@@ -10,10 +10,11 @@ const initialState = {
 const paniersReducer = (state = initialState, action) => {
     switch (action.type) { 
         
-        case "GET_NUMBER_PANIER": 
-        return {
-            ...state
-        };
+        // case "LIST-PANIERS": 
+        // return {
+        //     ...state, 
+        //     paniers: action.paniers
+        // };
         
         case "ADD-TO-PANIER":
             // let addedProduit = state.produits.find(produit => produit.id === action.id)

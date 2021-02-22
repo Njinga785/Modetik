@@ -45,7 +45,7 @@ export class ProductDescription extends Component {
                     <Card.Title>{this.state.produit.nom}</Card.Title>
                     <Card.Text>{this.state.produit.prix}</Card.Text> 
                     <Card.Text>{this.state.produit.description}</Card.Text>
-                    <p>  {localStorage.getItem("token") && (<Button id='button' onClick={() => this.handleAddToPanier(this.state.produit.id)} variant="success">AJOUTER AU PANIER</Button>)} </p>
+                    <p>  {localStorage.getItem("tokenClient") && (<Button id='button' onClick={() => this.handleAddToPanier(this.state.produit.id)} variant="success">AJOUTER AU PANIER</Button>)} </p>
                     
                 </Card.Body>
             </Card>

@@ -9,8 +9,10 @@ const tokenMiddleware = (req, res, next) => {
     let token = req.headers.authorization
     console.log(req.headers.authorization);
     token = token.split(' ')[1]
+    console.log(token)
     jwt.verify(token, config.secret, (err, decoded) => {
-        
+        if (err) throw err;
+        console.log(decoded)
         if (decoded) { 
             req.decoded = decoded
             next()
@@ -27,7 +29,7 @@ const isAdmin = (req, res, next) => {
      let token = req.headers.authorization 
      token = token.split(' ')[1]
     jwt.verify(token, config.secret, (err, decoded) => {
-
+        if (err) throw err;
         if (decoded.isAdmin === true) {
             next()
         } else {
@@ -43,6 +45,7 @@ const emailMiddleware = (req, res, next) => {
 
 
     db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {
+        if (err) throw err;
         if (results.length) {
             console.log('err email already exist')
             res.status(400).send("Email already exists")

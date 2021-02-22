@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import Nav from 'react-bootstrap/Nav';
 import logoBasket from '../assets/icones/shopping-cart.png';
 import logoHome from '../assets/icones/home.png';
-import logoProfile from '../assets/icones/utilisateur.png';
+// import logoProfile from '../assets/icones/utilisateur.png';
 import { connect } from 'react-redux'
 
 export class HeaderAdmin extends Component {
@@ -26,7 +26,7 @@ export class HeaderAdmin extends Component {
                
                 quantite: nombre
             }) 
-            console.log(this.state.quantite)
+            // console.log(this.state.quantite)
         }
         //     this.SignOut = this.SignOut.bind(this)
         // }
@@ -48,27 +48,34 @@ export class HeaderAdmin extends Component {
                 <Nav.Item>
                     <Nav.Link as={Link} to="/sign-in">Signin</Nav.Link>
                 </Nav.Item>
+                 <Nav.Item>
+                    <Nav.Link as={Link} to="/mespaniers">Mespaniers</Nav.Link>
+                </Nav.Item> 
                 <Nav.Item>
-                    <Nav.Link as={Link} to="/profile"><img src={logoProfile} alt="profile" /></Nav.Link>
+                    <Nav.Link as={Link} to="/admin/sign-up">SignUpAdmin</Nav.Link>
+                </Nav.Item>
+                 <Nav.Item>
+                    <Nav.Link as={Link} to="/admin/produistadmin">ProductsAdmin</Nav.Link>
+                </Nav.Item> 
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/admin/dashboard">DashboardAdmin</Nav.Link>
+                </Nav.Item> 
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/admin/editclient/:id">ClientsAdmin</Nav.Link>
+                </Nav.Item> 
+                <Nav.Item>
+                    <Nav.Link as={Link} to="/admin/sign-in">SignInAdmin</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} to="/sign-upAdmin">SignUpAdmin</Nav.Link>
+                    <Nav.Link as={Link} to="/admin/addcategorie">AddCategorie</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} to="/filter">Filter</Nav.Link>
+                    <Nav.Link as={Link} to="/admin/addproduct">AddProduct</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={Link} to="/sign-inAdmin">SignInAdmin</Nav.Link>
+                    <Nav.Link as={Link} to="/profile/:id">ClientProfile</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={Link} to="/addcategorie">AddCategorie</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={Link} to="/addproduct">AddProduct</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                </Nav.Item>
+               
                 <Nav.Item>
                     <Nav.Link as={Link} to="/panier"><img src={logoBasket} alt="panier" /> {this.state.quantite}</Nav.Link>
                 </Nav.Item>

@@ -15,17 +15,25 @@ const produitsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 produits: [...state.produits, action.produit]
-            };
+            }; 
+        case "UPDATE-PRODUIT": 
+        return {
+            ...state, 
+            nom: action.nom, 
+            prix: action.prix,
+            description: action.description, 
+            photo: action.photo,
+            categorie_id: action.categorie_id 
+
+        }
         case "DELETE":
-            let produits = state.produits.slice()
-            for (let i = 0; i < produits.length; i++) {
-                if (produits[i].produit_id === action.id) {
-                    produits.splice(i, 1)
-                }
-            }
-            return {
-                ...state, produits: produits
-            };
+            let new_produits = state.produits.filter(produit=> action.id !== produit.id) 
+
+            return{
+                ...state,
+                produits: new_produits,
+                // total: newTotal
+            }; 
         case "GET_GATEGORIE":
             return {
                 ...state,

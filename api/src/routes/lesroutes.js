@@ -19,11 +19,11 @@ routes.post("/clients/sign-up", (req, res) => {
         if (!req.body.lastName) throw 'NO LASTNAME'
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-        if (!req.body.profile) throw 'NO PICTURE'
+        
         bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(req.body.password, salt, (err, hash) => {
                 console.log(hash)
-                var sql = `INSERT INTO clients (firstName, lastName, email,password, profile) VALUES ('${req.body.firstName}','${req.body.lastName}', '${req.body.email}', '${hash}', '${req.body.profile}')`;
+                var sql = `INSERT INTO clients (firstName, lastName, email,password) VALUES ('${req.body.firstName}','${req.body.lastName}', '${req.body.email}', '${hash}')`;
                 db.query(sql, function (err, result) {
                     if (err) throw err;
                     console.log(result)
@@ -42,7 +42,7 @@ routes.post("/clients/sign-up", (req, res) => {
 routes.get("/clients", (req, res) => {
     try {
 
-        db.query(`SELECT clients.id, clients.firstName, clients.lastName, clients.email, clients.password, clients.profile FROM clients`, function (err, result) {
+        db.query(`SELECT * FROM clients`, function (err, result) {
             if (err) {
                 res.status(400).send("Error")
                 throw err
@@ -116,64 +116,23 @@ routes.get("/clients/:id", function (req, res) {
     }
 })
 
-//put/client/:id 
 
 
-// routes.put("/clients/:id", async function (req, res) {
-
-//     try {
-
-//         var password = await bcrypt.hash(req.body.password, saltRounds)
-
-
-//         db.query(`UPDATE clients SET firstName = '${req.body.firstName}', lastName = '${req.body.lastName}', email = '${req.body.email}', password = '${req.body.password}', WHERE id = ${req.params.id}`, async function (err, results) {
-//             if (err) {
-//                 res.send(err)
-
-//             } else {
-//                 res.status(200).send("Updated")
-//             }
-
-//         })
-
-//     } catch (err) {
-//         res.status(400).send(err)
-//     }
-// }) 
-
-
-routes.put("/clients/:id", async function(req, res){
-    const { firstName, email } = req.body
-    // const pass = await bcrypt.hash(req.body.password, saltRounds)
+routes.put("/clients/:id", async function(req, res){ 
+    console.log(req.body)
+    const { firstName, lastName, email, profile } = req.body
+    
     const id = req.params.id
     console.log(id);
-    // // let profileUpdated = {
-    // //     firstName: req.body.firstName,
-    // //     email: req.body.email,       
-    // //     // avatar: req.body.avatar,
-    // //     password: ,
-    // //     id: 
-    // }
+    
     try{
-        db.query(`UPDATE clients SET firstName = '${firstName}', email = '${email}' WHERE id = '${id}'`, async function(err, results) {
+        db.query(`UPDATE clients SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}' , profile = '${profile}' WHERE id = '${id}'`, async function(err, results) {
             if (err) {
                 res.status(400).send("Error")
             } else {
                 res.status(200).send("Updated")
 
-                // if (req.body.password) {
-                    
-                //     db.query(`UPDATE clients SET password = ? WHERE id = ?`, [profileUpdated.password, profileUpdated.id], function(err) {
-                //         if (err) {
-                //             console.log(err);
-                //             res.status(400).send("Error")
-                //         } else {
-                            
-                //         }
-                    // })
-                // } else {
-                //     res.status(200).send("Updated")
-                // }              
+               
             }
         })     
         
@@ -184,10 +143,13 @@ routes.put("/clients/:id", async function(req, res){
 })
 
 
-routes.delete("/clients/:id", async function (req, res) {
+routes.delete("/clients/:id", async function (req, res) { 
+    
+    const id = req.params.id 
+    console.log(id)
 
     try {
-        db.query(`DELETE FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {
+        db.query(`DELETE FROM clients WHERE id = '${id}'`, async function (err, results) {
             if (err) {
                 res.send(err)
 
@@ -238,43 +200,7 @@ routes.get("/categorie", (req, res) => {
     }
 })
 
-routes.post("/contact", (req, res) => {
-    try {
-        if (!req.body.nom) throw 'NO NAME'
-        if (!req.body.email) throw 'NO EMAIL'
-        if (!req.body.message) throw 'NO MESSAGE'
 
-        var sql = `INSERT INTO contact (nom, email, message) VALUES ('${req.body.nom}', '${req.body.email}', '${req.body.m}')`;
-        db.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log(result)
-            res.send(result)
-        });
-
-    } catch (err) {
-        console.log(err)
-        res.status(403).send(err)
-
-    }
-}) 
-
-
-routes.get("/contact", (req, res) => {
-    try {
-        db.query(`SELECT * FROM contact`, function (err, result) {
-            if (err) {
-                res.status(400).send("Error")
-            } else {
-                res.status(200).send(result)
-            }
-        })
-
-    } catch (err) {
-        console.log(err);
-        res.status(400).send("Error")
-
-    }
-})
 
 routes.get("/produits", (req, res) => {
     try {
@@ -333,7 +259,7 @@ routes.get("/produits/:id", (req, res) => {
     }
 })
 
-// routes.use("/produits", middlewares.isAdmin)
+//  routes.use("/produits", middlewares.isAdmin)
 
 routes.post("/produits", (req, res) => {
     try {
@@ -474,17 +400,17 @@ routes.post("/panier", (req, res) => {
         console.log("--------------"); 
         console.log(req.decoded)
         // if (!req.body.date) throw 'NO DATE'
-        //if (!req.body.total) throw 'NO TOTAL'
+        if (!req.body.total) throw 'NO TOTAL'
         //if (!req.body.client_id) throw 'NO CLIENT'
 
-        var sql = `INSERT INTO panier (total, client_id) VALUES ('${req.body.total}', ${req.decoded.id})`;
+        var sql = `INSERT INTO paniers (total, client_id) VALUES ('${req.body.total}', ${req.decoded.id})`;
         db.query(sql, function (err, result) {
             if (err) throw err;
             console.log(result) 
             // créer une boucle qui parcours mon panier 
             // let panier = req.body
-          for (var i = 0; i < req.body.panier.length; i++) {
-          var item =  `INSERT INTO panieritem (panier_id, produit_id, quantité) VALUES('${result.insertId}', '${req.body.panier[i].id}', '${req.body.panier[i].quantite}')`
+          for (var i = 0; i < req.body.addedProduits.length; i++) {
+          var item =  `INSERT INTO panieritem (panier_id, produit_id, quantité) VALUES('${result.insertId}', '${req.body.addedProduits[i].id}', '${req.body.addedProduits[i].quantite}')`
             db.query(item, function (err, res) {
                 if (err) throw err 
                 console.log(res)
@@ -502,13 +428,17 @@ routes.post("/panier", (req, res) => {
 
 }) 
 
-routes.get("/panier", (req, res) => {
-    try {
-        console.log("/GET")
-        db.query(`SELECT * FROM panier`, function (err, result) {
+routes.get("/panier/:id", (req, res) => {
+    try { 
+        // let id = req.params.id
+        // console.log("/GET")
+        db.query(`SELECT * FROM paniers WHERE client_id = '${req.params.id}'`, function (err, result) {
             if (err) {
                 res.status(400).send("Error")
-            } else {
+            } else { 
+                console.log('mes paniers') 
+                console.log(req.params.id)
+                 console.log(result)
                 res.status(200).send(result)
             }
         })

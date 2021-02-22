@@ -8,9 +8,18 @@ export const getListProduits = (produits) => ({
 export const addProduit = (produit) => ({
     type: "ADD-PRODUIT",
     produit: produit
-})   
+})  
 
-export const deleteProcduits = (id ) => ({
+export const updateProduit = (nom, prix, description, photo, categorie_id) => ({
+    type: "UPDATE-PRODUIT", 
+    nom: nom, 
+    prix: prix, 
+    description: description, 
+    photo: photo, 
+    categorie_id: categorie_id
+})
+
+export const deleteProduits = (id ) => ({
     type: 'DELETE_PRODUIT',
     id: id
 }); 

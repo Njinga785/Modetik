@@ -35,7 +35,7 @@ export class AddProduct extends Component {
             admin_id: localStorage.getItem('id')
         },
             { 
-                headers : { authorization: `Bearer ${localStorage.getItem('token')}`}
+                headers : { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}`}
                 // headers: {
                 //     token: localStorage.getItem('token')
 

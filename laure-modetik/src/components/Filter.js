@@ -43,7 +43,7 @@ export class Filter extends Component {
                     <select value={this.state.value} onChange={this.props.filterProduits}>
                         <option>Categorie</option>
                         {categories && categories.map(categorie => {
-                            console.log(categories);
+                            // console.log(categories);
                             return (
                                 <option value={categorie.id} key={categorie.id}>{categorie.categorieNom}</option>
                             )
