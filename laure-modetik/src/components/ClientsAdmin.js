@@ -15,8 +15,7 @@ export class ClientsAdmin extends Component {
             lastName: '',
             email: '',
             message: '',
-            // password: '',
-            profile: '',
+            
             id: ''
         }
         this.openModal = this.openModal.bind(this);
@@ -29,7 +28,7 @@ export class ClientsAdmin extends Component {
             firstName: client.firstName,
             lastName: client.lastName,
             email: client.email,
-            profile: client.profile,
+            
             id: client.id
         });
     }
@@ -47,7 +46,7 @@ export class ClientsAdmin extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
-            profile: this.state.profile
+           
 
 
         })
@@ -61,8 +60,7 @@ export class ClientsAdmin extends Component {
 
 
         }
-        // let id = this.props.match.params.id 
-        // console.log(this.props.id)
+        
         axios.put(`http://localhost:3003/clients/${this.state.id}`, personne,  {headers: {'Content-Type': 'application/json'}}) 
 
 
@@ -137,7 +135,7 @@ export class ClientsAdmin extends Component {
     render() {
         const clients = this.state.clients
         return (
-            <div>
+            <div className='clients'>
                 <h4 className="title">LES CLIENTS</h4>
                 <Table striped bordered hover>
                     <thead>
@@ -145,8 +143,7 @@ export class ClientsAdmin extends Component {
                             <th>FirstName</th>
                             <th>LastName</th>
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>Profile</th>
+                           
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -159,10 +156,9 @@ export class ClientsAdmin extends Component {
                                     <td>{client.firstName}</td>
                                     <td>{client.lastName}</td>
                                     <td>{client.email}</td>
-                                    <td>{client.password}</td>
-                                    <td>{client.profile}</td>
+                                   
                                     <td>
-                                        <span className="btn btn-primary" onClick={() => this.openModal(client)} >Edit</span>
+                            
 
                                         <span className="btn btn-danger" onClick={() => this.deleteClient(client.id)}>Delete</span>
                                     </td>
@@ -197,10 +193,7 @@ export class ClientsAdmin extends Component {
                                         <Form.Control onChange={this.handleChange} value={this.state.email} type="email" placeholder="Email" required />
                                     </Form.Group>
 
-                                    <Form.Group controlId="profile">
-                                        <Form.Label>Profile</Form.Label>
-                                        <Form.Control onChange={this.handleChange} value={this.state.profile} type="text" placeholder="Profile" required />
-                                    </Form.Group>
+                                    
                                     <Button variant="success" type="submit">Submit</Button>  <Button variant="outline-dark" type="close" onClick={() => this.closeModal()}>Close</Button>
 
                                 </Form>

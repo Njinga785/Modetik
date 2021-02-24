@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { removeProduit, addQuantite, subtractQuantite } from './store/actions/actionPanier'
+import {AiFillDelete}  from 'react-icons/ai';
 //  import { Link } from 'react-router-dom'
 // import Card from 'react-bootstrap/Card'
 // import CardGroup from 'react-bootstrap/CardGroup'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
+import {clearPanier} from './store/actions/actionPanier'
 // import Table from 'react-bootstrap/Table';
 // import PanierItem from './PanierItem';
 
@@ -81,10 +83,12 @@ export class Panier extends Component {
     //to substruct from the quantity
     handleSubtractQuantite = (id) => {
         this.props.subtractQuantite(id);
+    } 
+
+    handleClearPanier = () => {
+        this.props.clearPanier();
     }
-    // handleTotalPrice = (prix, quantite) =>{
-    //     return(produit.prix * produit.quantite)
-    // }
+    
 
 
 
@@ -108,7 +112,7 @@ export class Panier extends Component {
 
 
                     return (
-                        <div key={produit.id}>
+                        <div className="papa" key={produit.id}>
                             <li className="collection-item avatar" >
                                 <div className="item-img">
                                     <img src={infoProduit.photo} width="286" height="286" alt="infoProduit" className="" />
@@ -125,7 +129,7 @@ export class Panier extends Component {
                                     </p>
                                     <Button variant="info" onClick={() => { this.handleSubtractQuantite(produit.id) }}>-</Button>
 
-                                    <div> <Button variant="danger" onClick={() => { this.handleRemoveProduit(produit.id) }}>Remove</Button></div>
+                                    <div> <Button variant="danger" onClick={() => { this.handleRemoveProduit(produit.id) }}><AiFillDelete color='white' size='2rem'/></Button></div>
 
                                     <div>
                                         <strong>TotalProduits: {totalProduits.toFixed(1)}</strong>
@@ -144,14 +148,14 @@ export class Panier extends Component {
                 <p><b>Votre Panier est vide</b></p>
             )
         return (
-            <div className="container">
+            <div className="containerPanier">
                 <div className="cart">
                     <h5>Vous avez {this.state.quantite} produits dans votre panier</h5>
                     <ul className="collection">
                         {addedProduits}
                     </ul>
                   <h4><strong>  Total: {total}</strong></h4>
-                    <div><Button variant="success" onClick={() => this.validatedPart(total)}>Commande</Button></div>
+                    <div><Button variant="success" onClick={() => this.validatedPart(total)}>Commander</Button> <Button variant="success" onClick={() => this.handleClearPanier()}>Vider</Button></div>
                 </div>
             </div>
         )
@@ -177,7 +181,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     removeProduit,
     addQuantite,
-    subtractQuantite
+    subtractQuantite,
+    clearPanier
 }
 
 

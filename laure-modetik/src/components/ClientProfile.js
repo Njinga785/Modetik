@@ -67,7 +67,7 @@ export class ClientProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="profile">
         <Form onSubmit={this.handleSubmit}>
           <h1 className="titreForm">Profile</h1>
           <Form.Group controlId="firstName">

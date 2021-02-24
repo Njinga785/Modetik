@@ -46,15 +46,15 @@ export class AddCategorie extends Component {
 
     render() {
         return (
-            <div>
+            <div className="categorie">
                 <h1 className="titreForm">ADD-CATEGORIE</h1>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Row>
+                    
                         <Form.Group controlId="categorieNom">
                             <Form.Label>Categorie Nom</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie Nom" required />
                         </Form.Group>
-                    </Form.Row>
+                    
 
                     <Button variant="success" type="submit">
                         Submit

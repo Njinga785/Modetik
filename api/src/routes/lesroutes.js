@@ -493,27 +493,27 @@ routes.get("/profile", (req, res) => {
 })
 
 
-routes.post("/panieritem", (req, res) => {
-    try {
-        if (!req.body.product_id) throw 'NO PRODUIT_ID'
-        if (!req.body.panier_id) throw 'NO PANIER_ID'
-        if (!req.body.quantite) throw 'NO QUANTITE'
-        console.log(req.body)
+// routes.post("/panieritem", (req, res) => {
+//     try {
+//         if (!req.body.product_id) throw 'NO PRODUIT_ID'
+//         if (!req.body.panier_id) throw 'NO PANIER_ID'
+//         if (!req.body.quantite) throw 'NO QUANTITE'
+//         console.log(req.body)
 
-        var sql = `INSERT INTO panieritem (produit_id, panier_id, quantite) VALUES ('${req.body.produit_id}', '${req.body.panier_id}', '${req.body.quantite}')`;
-        db.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log(result)
-            res.send(result)
-        });
+//         var sql = `INSERT INTO panieritem (produit_id, panier_id, quantite) VALUES ('${req.body.produit_id}', '${req.body.panier_id}', '${req.body.quantite}')`;
+//         db.query(sql, function (err, result) {
+//             if (err) throw err;
+//             console.log(result)
+//             res.send(result)
+//         });
 
 
-    } catch (err) {
-        console.log(err)
-        res.status(403).send(err)
-    }
+//     } catch (err) {
+//         console.log(err)
+//         res.status(403).send(err)
+//     }
 
-})
+// })
 
 
 

@@ -1,36 +1,40 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom"
-import Nav from 'react-bootstrap/Nav';
-import arrowup from '../assets/icones/up-arrow.png';
+
+import { AiFillLinkedin } from 'react-icons/ai';
+import { AiFillFacebook } from 'react-icons/ai';
+import { AiFillInstagram } from 'react-icons/ai';
+// import arrowup from '../assets/icones/up-arrow.png';
 
 export class Footer extends Component {
     render() {
         return (
-            <div>
-                <div className="Footer">
+            <div className="main-footer">
+                <div className="container">
+                    <div className="row bas">
+                        <div className="col">
+                            <h6>MODETIK</h6>
+                            <p>Achetez de maniére éthique<br /> de la mode valorisant le <br />savoir faire artisanal africain</p>
+                        </div>
+                        <div className="col">
+                            <h6>CONTACT</h6>
+                            <p>Modetik<br />80 Avenue Marcel Gerard<br />75017<br />0606060606<br />contact@modetik.org</p>
+                        </div>
+                        <div className="col">
+                            <h6>SUIVEZ-NOUS</h6> 
+                            <ul>
+                            <li><a href="https://www.linkedin.com/in/laure-adrienne-njinga"><AiFillLinkedin color='black' size='2rem' /></a> </li>
+                            <li><a href="/"><AiFillFacebook color='black' size='2rem' /></a> </li>
+                            <li><a href="/"><AiFillInstagram color='black' size='2rem' /></a> </li>
+                            </ul>
+                        </div>
 
-                    <h1>About Us ©</h1>
-                    <div className="f-wrap">
-                        <div className="sitemap-left">
-                            <h2>SITEMAP</h2>
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/artistes">Galeries</Nav.Link>
-                        </div>
-                        <div className="f-wrap-center">
-                            <h2>SOCIAL</h2>
-                            <Nav.Link as={Link} to="/">Instagram</Nav.Link>
-                            <Nav.Link as={Link} to="/artistes">Facebook</Nav.Link>
-                            <Nav.Link as={Link} to="/artistes">Linkedin</Nav.Link>
 
-                        </div>
-                        <div className="f-wrap-right">
-                            <h2>Top</h2>
-                            <div className="scroll-top">
-                                <a href="#navbar" ><img src={arrowup} className="arrowup" alt="" /></a>
-                            </div>
-                        </div>
+                    </div>
+                    <div className="row footer-bottom">
+                        <p className="col-sm">Copyright &copy; Laure Njinga {new Date().getFullYear()}</p>
                     </div>
                 </div>
+
             </div>
         )
     }

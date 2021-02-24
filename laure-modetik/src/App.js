@@ -16,7 +16,7 @@ import ProductDescription from './components/ProductDescription';
 import Header from './components/Header'
 import ClientProfile from './components/ClientProfile';
 import Filter from './components/Filter'
-import DashboardAdmin from './components/DashboardAdmin';
+
 import ClientsAdmin from './components/ClientsAdmin';
 import  MesPaniers  from './components/MesPaniers';
 import Footer from './components/Footer';
@@ -41,7 +41,7 @@ function App() {
         <Route exact path='/mespaniers' component={MesPaniers}/>
         {/* <Route exact path='/editclients' component={EditClients}/> */}
         <Route exact path='/admin/produistadmin' component={ProductsAdmin}/>
-        <Route exact path='/admin/dashboard' component={DashboardAdmin}/>
+        
         <Route exact path='/filter' component={Filter}/> 
       
         <Route exact path='/admin/editclient/:id' component={ClientsAdmin}/>

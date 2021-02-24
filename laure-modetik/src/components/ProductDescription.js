@@ -39,7 +39,7 @@ export class ProductDescription extends Component {
 
     render() {
         const produit = this.state.produit ? (
-            <Card style={{ width: '20rem', margin: 'auto'}}>
+            <Card className='description' style={{ width: '20rem', margin: 'auto'}}>
                 <Card.Img variant="top" src={this.state.produit.photo} />
                 <Card.Body>
                     <Card.Title>{this.state.produit.nom}</Card.Title>
@@ -56,7 +56,7 @@ export class ProductDescription extends Component {
             )
         // console.log(produit)
         return (
-            <div className="container">
+            <div className="containerProduit">
                 {produit}
             </div>
 

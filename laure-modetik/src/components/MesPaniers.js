@@ -35,7 +35,7 @@ export class MesPaniers extends Component {
   render() {
     let panier_client = this.props.panier_client
     return (
-      <div>
+      <div className="panier">
         <h4 className="title">MES PANIERS</h4>
         <Table striped bordered hover>
           <thead>
@@ -43,7 +43,7 @@ export class MesPaniers extends Component {
               <th>Total</th>
               <th>Date</th>
               <th>client_id</th> 
-              <th>Actions</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -54,11 +54,7 @@ export class MesPaniers extends Component {
                   <td>{panier.total}</td>
                   <td>{panier.date}</td>
                   <td>{panier.client_id}</td>
-                  <td>
-                    <span className="btn btn-primary">Edit</span>
-
-                    <span className="btn btn-danger">Delete</span>
-                  </td>
+                  
                 </tr>
               );
 

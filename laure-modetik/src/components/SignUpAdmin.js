@@ -56,19 +56,19 @@ export class SignUpAdmin extends Component {
                         <Form.Group controlId="name">
                             <Form.Label>Name:</Form.Label>
                             <Form.Control type="text" placeholder="Enter name" />
-                            <div className="errorMsg">{this.state.errors.name}</div>
+                            
                         </Form.Group>
 
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" />
-                            <div className="errorMsg">{this.state.errors.email}</div>
+                            
                         </Form.Group>
 
                         <Form.Group controlId="password">
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
-                            <div className="errorMsg">{this.state.errors.password}</div>
+                        
                         </Form.Group>
                          <Form.Group controlId="conPassword">
                             <Form.Label>ConPassword:</Form.Label>

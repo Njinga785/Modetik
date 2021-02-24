@@ -163,7 +163,7 @@ class ProductsAdmin extends Component {
         <h4 className="title">LES PRODUITS</h4>
         <Table striped bordered hover>
           <thead>
-            <tr>
+            <tr >
               <th>Nom</th>
               <th>Prix</th>
               <th>Description</th>

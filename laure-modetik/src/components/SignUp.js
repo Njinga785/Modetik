@@ -123,7 +123,7 @@ validateForm = () => {
     
     render() {
         return (
-            <div>
+            <div className="inscrit">
                 <Form onSubmit={this.handleSubmitClient}>
                     <h1 className="titreForm">Sign-Up</h1>
                     <Form.Group controlId="firstName">

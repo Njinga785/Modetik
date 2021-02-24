@@ -35,7 +35,7 @@ export class SignInAdmin extends Component {
                     localStorage.setItem('id', decoded.id)
                     localStorage.setItem('isAdmin', true)
                     this.props.SignIn(response.data.token, decoded.name, decoded.email, decoded.id)
-                    this.props.history.push('/admin/dashboard')
+                    this.props.history.push('/admin/produistadmin')
                 } else {
 
                     console.log('acces interdit')

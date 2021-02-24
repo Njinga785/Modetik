@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import Nav from 'react-bootstrap/Nav';
-import logoBasket from '../assets/icones/shopping-cart.png';
-import logoProfil from '../assets/icones/utilisateur.png';
-import logoHome from '../assets/icones/home.png';
+
+import logo from '../assets/images/imageonline-co-whitebackgroundremoved 3.png';
+import titre from '../assets/icones/MODETIK.png';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { SignInClients, signOutClients } from './store/actions/actionClient'
@@ -11,8 +11,11 @@ import { SignIn, signOut } from './store/actions/actionAdmin'
 import Navbar from 'react-bootstrap/esm/Navbar';
 import { getListProduits } from './store/actions/actionProduits'
 import { panierClient } from './store/actions/actionClient'
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai';
 // import axios from 'axios' 
-import {clearPanier} from './store/actions/actionPanier'
+import { clearPanier } from './store/actions/actionPanier'
 // import jwt from "jsonwebtoken";
 
 export class Header extends Component {
@@ -20,8 +23,8 @@ export class Header extends Component {
         super(props)
         this.state = {
             name: this.props.name,
-            quantite: 0, 
-            produits: [], 
+            quantite: 0,
+            produits: [],
             categorieNom: '',
             addedProduits: []
         }
@@ -30,7 +33,7 @@ export class Header extends Component {
 
     signOutAdmin = () => {
         localStorage.clear();
-       
+
         this.props.signOut();
         this.props.history.push('/');
     }
@@ -38,7 +41,7 @@ export class Header extends Component {
     signOutClient = () => {
         localStorage.clear();
         // this.props.addedProduits()
-        this.props.signOutClients() 
+        this.props.signOutClients()
         this.props.clearPanier()
         this.props.history.push('/');
     }
@@ -54,64 +57,7 @@ export class Header extends Component {
 
             quantite: nombre
         })
-        // console.log(this.state.quantite) 
 
-
-    //     axios.get(`http://localhost:3003/panier/${this.props.id}`, {
-    //   headers: { authorization: `Bearer ${localStorage.getItem('tokenClient')}` }
-    // })
-    //   .then((response) => {
-
-    //     console.log(response.data)
-    //     this.setState({ produits: response.data })
-
-    //     this.props.panierClient(response.data)
-
-    //   })
-    //   .catch(error => {
-    //     console.error(error)
-    //   })
-
-    //     axios.get('http://localhost:3003/produits')
-    //         .then((response) => {
-
-    //             console.log(response.data)
-    //             this.setState({ produits: response.data })
-
-    //             this.props.getListProduits(response.data)
-
-    //         })
-    //         .catch(error => {
-    //             console.error(error)
-    //         }) 
-
-            // let id = this.props.match.params.id
-            // axios.get(`http://localhost:3003/produits/${id}`)
-            // .then((response) => {
-            //     console.log(response) 
-            //     // this.props.addToPanier(response.data)
-            //     this.setState({
-            //         produit: response.data[0]
-            //     })
-
-            // })
-
-            // axios.post(`http://localhost:3003/categorie`, {
-            //     categorieNom: this.state.categorieNom },
-            //     // admin_id: localStorage.getItem('id')
-            
-            //     {
-            //         headers: { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}` }
-    
-    
-            //     })
-            //     .then((response) => {
-            //         console.log(response)
-            //         // this.props.addProduct()
-            //     })
-            //     .catch((err) => {
-            //         console.log(err)
-            //     })
     }
     render() {
 
@@ -119,17 +65,22 @@ export class Header extends Component {
             if (localStorage.getItem("tokenAdmin")) {
 
                 return (
-                    <Navbar>
-                        <Nav>
-                            <Nav.Link as={Link} to="/admin/addproduct">AddProduct</Nav.Link>
-                            <Nav.Link as={Link} to="/admin/addcategorie">AddCategorie</Nav.Link>
-                            <Nav.Link as={Link} to="/admin/produistadmin">ProductsAdmin</Nav.Link>
-                            <Nav.Link as={Link} to="/admin/editclient/:id">ClientsAdmin</Nav.Link>
-                            <Nav.Link as={Link} to="/admin/dashboard">DashboardAdmin</Nav.Link>
-                        </Nav>
-                        <Navbar.Brand href="/" onClick={this.signOutAdmin} >Deconnexion</Navbar.Brand>
+                    <Navbar collapseonselect='true' expand="lg" bg="dark" variant="dark" fixed='top'>
+                        <Navbar.Brand href="#home"><img src={logo} width='40' height='40' alt="logo" />
+                            <div className='titre'> <img src={titre} alt='titre' /></div>
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className='justify-content-between'>
+                                <Nav.Link as={Link} to="/admin/addproduct">AddProduct</Nav.Link>
+                                <Nav.Link as={Link} to="/admin/addcategorie">AddCategorie</Nav.Link>
+                                <Nav.Link as={Link} to="/admin/produistadmin">ProductsAdmin</Nav.Link>
+                                <Nav.Link as={Link} to="/admin/editclient/:id">ClientsAdmin</Nav.Link>
+                                <Navbar.Brand href="/" onClick={this.signOutAdmin} >Deconnexion</Navbar.Brand>
+                            </Nav>
+                        </Navbar.Collapse>
 
-                    </Navbar>
+                    </Navbar >
 
 
                 );
@@ -137,30 +88,47 @@ export class Header extends Component {
             } else {
 
                 return (
-                    <Nav variant="pills">
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/admin/sign-up">SignUpAdmin</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link as={Link} to="/admin/sign-in">SignInAdmin</Nav.Link>
-                        </Nav.Item>
+                    <Navbar collapseonselect='true' expand="lg" bg="dark" variant="dark" fixed='top'>
+                        
+                            
+                                <Navbar.Brand href="#home"><img src={logo} width='40' height='40' alt="logo" />
+                                    <div className='titre'> <img src={titre} alt='titre' /></div>
+                                </Navbar.Brand>
+                                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className='justify-content-between'>
+                                <Nav.Link as={Link} to="/admin/sign-up">SignUpAdmin</Nav.Link>
 
-                    </Nav>
+
+                                <Nav.Link as={Link} to="/admin/sign-in">SignInAdmin</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
                 );
 
             }
         } else if (localStorage.getItem("tokenClient")) {
             return (
-                <Navbar className="userNavbar">
-                    <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/"><img src={logoHome} alt="home" /></Nav.Link>
-                        <Nav.Link as={Link} to="/mespaniers">Mespaniers</Nav.Link>
-                        <Nav.Link as={Link} to="/profile/"><img src={logoProfil} alt="profil" /></Nav.Link>
-                        <Nav.Link as={Link} to="/panier"><img src={logoBasket} alt="panier" /> {this.state.quantite}</Nav.Link>
-                    </Nav>
+                <Navbar collapseonselect='true' expand="lg" bg="dark" variant="dark" fixed='top'>
+                    <Navbar.Brand href="#home"><img src={logo} width='40' height='40' alt="logo" />
+                        <div className='titre'> <img src={titre} alt='titre' /></div>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link as={Link} to="/"><AiOutlineHome color='black' size='2rem' /></Nav.Link>
+                        </Nav>
+                        <Nav className='justify-content-between'>
+                            <Nav.Link as={Link} to="/profile/"><AiOutlineUser color='black' size='2rem' /></Nav.Link>
 
-                    <Navbar.Brand href="/" onClick={this.signOutClient} >Deconnexion</Navbar.Brand>
+                            <Nav.Link as={Link} to="/panier"><AiOutlineShoppingCart color='black' size='2rem' /> {this.state.quantite}</Nav.Link>
 
+                            <Nav.Link as={Link} to="/mespaniers">Mespaniers</Nav.Link>
+                            <Navbar.Brand href="/" onClick={this.signOutClient} >Deconnexion</Navbar.Brand>
+                        </Nav>
+
+
+                    </Navbar.Collapse>
                 </Navbar>
             )
 
@@ -168,16 +136,21 @@ export class Header extends Component {
         } else {
 
             return (
-                <Navbar>
-                    <Nav variant="pills">
+                <Navbar collapseonselect='true' expand="lg" bg="dark" variant="dark" fixed='top'>
+                    <Navbar.Brand href="#home"><img src={logo} width='40' height='40' alt="logo" />
+                        <div className='titre'> <img src={titre} alt='titre' /></div>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link as={Link} to="/"><AiOutlineHome color='black' size='2rem' /></Nav.Link>
+                        </Nav>
+                        <Nav>
 
-                        <Nav.Link as={Link} to="/"><img src={logoHome} alt="home" /></Nav.Link>
-                        <Nav.Link as={Link} to="/panier"><img src={logoBasket} alt="panier" /> {this.state.quantite}</Nav.Link>
-                        <Nav.Link as={Link} to="/sign-up">SignUp</Nav.Link>
-                        <Nav.Link as={Link} to="/sign-in">Signin</Nav.Link>
-
-
-                    </Nav>
+                            <Nav.Link as={Link} to="/sign-up">SignUp</Nav.Link>
+                            <Nav.Link as={Link} to="/sign-in">Signin</Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
             );
 
@@ -186,9 +159,9 @@ export class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    produits: state.panierReducer.addedProduits, 
-    id: state.clientReducer.profile, 
-    addedProduits: state.panierReducer.addedProduits, 
+    produits: state.panierReducer.addedProduits,
+    id: state.clientReducer.profile,
+    addedProduits: state.panierReducer.addedProduits,
     // token: state.adminReduver.token
 
 })
@@ -199,7 +172,7 @@ const mapDispatchToProps = {
     SignIn,
     signOut,
     getListProduits,
-    panierClient, 
+    panierClient,
     clearPanier
 
 }
