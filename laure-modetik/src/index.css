@@ -1,19 +1,17 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Open Sans', sans-serif;
 } 
 
 
-.product-list {
+.product-list { 
+  margin: 1rem;
   margin-top: 100px;
 } 
 
@@ -32,9 +30,13 @@ code {
 .title {
   text-decoration: underline;
   margin: 1em;
+  color: #C5951C;
 } 
 
 .allProduit {
+  margin-top: 100px;
+}
+.tableProduits {
   margin-top: 100px;
 }
 
@@ -86,10 +88,12 @@ ul li {
 .item-desc{
   align-self:center;
 } 
-
+.supprimer {
+  margin-top: 15px;
+}
 /*footer*/ 
 .main-footer {
-   background-color: lightskyblue; 
+   background-color: #D6EEDA; 
    margin-top: 10rem;  
 }
 
@@ -100,10 +104,51 @@ ul li {
 .containerProduit {
   margin-top: 130px;
 }
+.containerPanier {
+  margin-top: 100px;
+}
 
 .bas{
   padding-top: 2rem;
 } 
+.justify-content-between {
+  margin-left: 800px;
+} 
+.panierTitre {
+  color: #C5951C;
+}
+
+.table {
+  margin-top: 100px;
+}
+
+.filter {
+  margin-top: 100px;
+  color: green;
+} 
+.choix {
+  color: green;
+}
+
+.toto {
+  color: green;
+} 
+.nom {
+  color: #C5951C;
+} 
+.linkText {
+  color: green;
+} 
+.titreForm {
+  color: #C5951C;
+} 
+/* #catego {
+  color: green;
+}  */
+.selection option:first-child {
+  color: green;
+}
+
 
 @media screen and (max-width: 775px) {
   .bas {
@@ -115,6 +160,17 @@ ul li {
     padding-top: 13px;
     
   } 
+  .editer {
+    margin-right: 10px;
+  } 
+  .supprimer {
+    margin-bottom: 12px;
+  } 
+
+  .card-list {
+    width: 100%;
+    margin-left: 30px;
+  }
 
   .collection-item {
     display: flex;
@@ -127,6 +183,94 @@ ul li {
   .clients {
     display: flex; 
     flex-direction: column;
+  } 
+
+  .boutonPanier {
+    display: flex;
+    flex-direction: column;
+  } 
+   .descript {
+     margin-top: 15px;
+   }
+  
+
+  
+
+  .table.boutonProduits { 
+    display: flex;
+    flex-direction: column;
   }
+
+  
+  .main-footer {
+    width: 100%;
+  } 
+
+  .tableClients thead{
+    display: none;
+  } 
+
+  .tableClients, .tableClients tbody, .tableClients tr, .tableClients td {
+    display: block;
+    width: 100%;
+  } 
+  .tableClients tr {
+    margin-bottom: 15px;
+  } 
+  .tableClients td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  } 
+  .tableClients td::before {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .tableClients td:nth-of-type(1):before { content: "FirstName"; }
+  .tableClients  td:nth-of-type(2):before { content: "LastName"; }
+  .tableClients  td:nth-of-type(3):before { content: "Email"; }
+  .tableClients  td:nth-of-type(4):before { content: "Actions"; } 
+
+
+  .tableProduits thead{
+    display: none;
+  } 
+  .tableProduits, .tableProduits tbody, .tableProduits tr, .tableProduits td {
+    display: block;
+    width: 100%;
+  } 
+  .tableProduits tr {
+    margin-bottom: 15px;
+  } 
+  .tableProduits td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    
+  } 
+  .tableProduits td::before {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+   
+  } 
+  .tableProduits .descript::before {
+    margin-top: -18px;
+  }
+  .tableProduits td:nth-of-type(1):before { content: "Nom"; }
+  .tableProduits td:nth-of-type(2):before { content: "Prix"; }
+  .tableProduits td:nth-of-type(3):before { content: "Description"; }
+  .tableProduits td:nth-of-type(4):before { content: "Photo"; }
+  .tableProduits td:nth-of-type(5):before { content: "Categorie_id"; }
+  .tableProduits td:nth-of-type(6):before { content: "Actions"; }
 }
 

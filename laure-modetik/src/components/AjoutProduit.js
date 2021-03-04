@@ -36,14 +36,11 @@ export class AddProduct extends Component {
         },
             { 
                 headers : { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}`}
-                // headers: {
-                //     token: localStorage.getItem('token')
-
-                // }
+               
             })
             .then((response) => {
                 console.log(response)
-                // this.props.addProduct()
+                
             })
             .catch((err) => {
                 console.log(err)
@@ -61,7 +58,7 @@ export class AddProduct extends Component {
         return (
             <div>
                 <div className="form">
-                    <h1 className="titreForm">ADD-PRODUCT</h1>
+                    <h1 className="titreForm">AJOUT-PRODUIT</h1>
                     <Form onSubmit={this.handleSubmit}>
 
                         <Form.Group controlId="nom">
@@ -86,16 +83,14 @@ export class AddProduct extends Component {
 
 
                         <Form.Group controlId="categorie_id">
-                            <Form.Label>Categotie</Form.Label>
+                            <Form.Label>Categorie</Form.Label>
                             <Form.Control onChange={this.handleChange} type="text" placeholder="Categorie" required/>
                         </Form.Group>
 
 
 
 
-                        <Button variant="success" type="submit">
-                            Submit
-                            </Button>
+                        <Button variant="success" type="submit">Ajouter</Button>
                     </Form>
                 </div>
             </div>

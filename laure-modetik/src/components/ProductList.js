@@ -3,7 +3,6 @@ import axios from 'axios'
 import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
 import CardGroup from 'react-bootstrap/CardGroup'
-
 import { connect } from 'react-redux'
 import { getListProduits } from './store/actions/actionProduits'
 import Filter from './Filter'
@@ -40,16 +39,16 @@ export class ProductList extends Component {
                 this.setState({ filteredProduits: [] }) 
                 return
             }
-            // this.setState({ categorie: e.target.value })
+            
             console.log(this.state.categorie) 
             console.log(e)
             try {
-                // let categorie_id = this.state.categorie_id 
+                 
                 console.log(this.state.categorie_id)
-                // let categorie = e.target.value
+        
                 let result = await axios.get(`http://localhost:3003/produits/filter/${e.target.value}`)
 
-               let produits_filtered = result.data //.filter(produit => produit.categorie_id === e.target.value) 
+               let produits_filtered = result.data  
                this.setState({  filteredProduits: produits_filtered})
 
             } catch (err) {
@@ -61,12 +60,12 @@ export class ProductList extends Component {
         } 
     }
         render() {
-            // let id = this.state.produit.id
+            
             const produits = this.state.filteredProduits.length? this.state.filteredProduits: this.props.produits
             // console.log(produits)
             return ( 
                 
-                <div>
+                <div className="page">
                     <Filter count={produits.length}
                         categorie={this.state.categorie}
                         filterProduits={this.filterProduits}></Filter>
@@ -76,11 +75,11 @@ export class ProductList extends Component {
                             return (
 
                                 <CardGroup style={{ width: '18rem' }} className="product-list" key={produit.id}>
-                                    <Card>
+                                    <Card className="card-list">
                                         <Link to={'/' + produit.id}>
                                             <Card.Img variant="top" src={produit.photo} width="286" height="286" alt="" />
                                             <Card.Body>
-                                                <Card.Title>{produit.nom}</Card.Title>
+                                                <Card.Title className="nom">{produit.nom}</Card.Title>
                                                 <Card.Text>{produit.prix}</Card.Text>
 
                                             </Card.Body>

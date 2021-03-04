@@ -6,7 +6,9 @@ import jwt from "jsonwebtoken";
 import { connect } from 'react-redux'
 import { SignInClients } from './store/actions/actionClient'
 
-export class SignIn extends Component {
+
+
+export class Connexion extends Component {
     constructor() {
         super()
         this.state = {
@@ -58,7 +60,7 @@ export class SignIn extends Component {
         return (
             <div>
                 <div className="form">
-                    <h1 className="titreForm">Sign-In</h1>
+                    <h1 className="titreForm">Connection</h1>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
@@ -70,10 +72,8 @@ export class SignIn extends Component {
                             <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required />
                         </Form.Group>
 
-                        <Button variant="success" type="submit">
-                            Sign-In
-                        </Button>
-
+                        <Button variant="success" type="submit">Envoyer</Button>
+                        
                     </Form>
                 </div>
             </div>
@@ -85,4 +85,4 @@ const mapDispatchToProps = {
     SignInClients
 }
 
-export default connect(null, mapDispatchToProps)(SignIn)
+export default connect(null, mapDispatchToProps)(Connexion)

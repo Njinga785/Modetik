@@ -15,7 +15,7 @@ export class AddCategorie extends Component {
     handleSubmit = (e) => {
         e.preventDefault({
             categorieNom: this.state.categorieNom,
-            // admin_id: localStorage.getItem('id')
+            
         })
 
         axios.post(`http://localhost:3003/categorie`, {
@@ -29,7 +29,7 @@ export class AddCategorie extends Component {
             })
             .then((response) => {
                 console.log(response)
-                // this.props.addProduct()
+                
             })
             .catch((err) => {
                 console.log(err)
@@ -47,7 +47,7 @@ export class AddCategorie extends Component {
     render() {
         return (
             <div className="categorie">
-                <h1 className="titreForm">ADD-CATEGORIE</h1>
+                <h1 className="titreForm">AJOUT-CATEGORIE</h1>
                 <Form onSubmit={this.handleSubmit}>
                     
                         <Form.Group controlId="categorieNom">
@@ -56,9 +56,7 @@ export class AddCategorie extends Component {
                         </Form.Group>
                     
 
-                    <Button variant="success" type="submit">
-                        Submit
-                    </Button>
+                    <Button variant="success" type="submit">Ajouter</Button>
                 </Form>
             </div>
         )

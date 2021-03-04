@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { removeProduit, addQuantite, subtractQuantite } from './store/actions/actionPanier'
 import {AiFillDelete}  from 'react-icons/ai';
-//  import { Link } from 'react-router-dom'
-// import Card from 'react-bootstrap/Card'
-// import CardGroup from 'react-bootstrap/CardGroup'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import {clearPanier} from './store/actions/actionPanier'
-// import Table from 'react-bootstrap/Table';
-// import PanierItem from './PanierItem';
+
 
 
 export class Panier extends Component {
@@ -39,10 +35,7 @@ export class Panier extends Component {
     }
 
     async validatedPart(total) {
-        // const headers = {
-        //     'Content-Type': 'application/json',
-        //     'Authorization': `Bearer ${this.props.token}`
-        // }
+        
         const articles = { 
             addedProduits: this.props.addedProduits,
             quantite: this.props.quantite,
@@ -54,11 +47,6 @@ export class Panier extends Component {
 
         axios.post('http://localhost:3003/panier', articles, {
             headers: { authorization: `Bearer ${localStorage.getItem('tokenClient')}` },
-
-
-            // produit_id: this.props.produits
-            //    panier: this.props.panier
-
         })
             .then((response) => {
                 console.log(response)
@@ -133,7 +121,7 @@ export class Panier extends Component {
 
                                     <div>
                                         <strong>TotalProduits: {totalProduits.toFixed(1)}</strong>
-                                        {/* <h4>Total <strong>{infoProduit.prix * produit.quantite}</strong></h4> */}
+                                        
                                     </div>
                                 </div>
 
@@ -150,12 +138,13 @@ export class Panier extends Component {
         return (
             <div className="containerPanier">
                 <div className="cart">
+                    <h3 className="panierTitre">Mon Panier</h3>
                     <h5>Vous avez {this.state.quantite} produits dans votre panier</h5>
                     <ul className="collection">
                         {addedProduits}
                     </ul>
                   <h4><strong>  Total: {total}</strong></h4>
-                    <div><Button variant="success" onClick={() => this.validatedPart(total)}>Commander</Button> <Button variant="success" onClick={() => this.handleClearPanier()}>Vider</Button></div>
+                    <div className="boutonPanier"><div><Button variant="success" onClick={() => this.validatedPart(total)}>Commander</Button></div>&nbsp;<div> <Button variant="danger" onClick={() => this.handleClearPanier()}>Vider Panier</Button></div></div>
                 </div>
             </div>
         )

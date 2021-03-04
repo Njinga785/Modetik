@@ -11,7 +11,7 @@ const initialState = {
 const clientReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SIGN-INCLIENTS": 
-        console.log(action)
+        // console.log(action)
             return {
                 ...state,
                 token: action.token,
@@ -42,7 +42,7 @@ const clientReducer = (state = initialState, action) => {
                 
             };
             case "PANIER-CLIENT": 
-            console.log(action.panier_client)
+            // console.log(action.panier_client)
                 return { 
                     ...state,
                     panier_client: [...action.panier_client]

@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import {connect} from 'react-redux' 
 import {SignIn} from './store/actions/actionAdmin'
 
-export class SignInAdmin extends Component {
+export class ConnexionAdmin extends Component {
     constructor() {
         super()
         this.state = {
@@ -57,7 +57,7 @@ export class SignInAdmin extends Component {
         return (
             <div>
                 <div className="form">
-                    <h1 className="titreForm">Sign-InAdmin</h1>
+                    <h1 className="titreForm">Connection</h1>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address:</Form.Label>
@@ -69,9 +69,7 @@ export class SignInAdmin extends Component {
                             <Form.Control onChange={this.handleChange} type="password" placeholder="Password" required/>
                         </Form.Group>
 
-                        <Button variant="success" type="submit">
-                            Sign-InAdmin
-                        </Button>
+                        <Button variant="success" type="submit">Envoyer</Button>
 
                     </Form>
                 </div>
@@ -86,4 +84,4 @@ const mapDispatchToProps = {
     SignIn 
  }
 
-export default connect(null, mapDispatchToProps) (SignInAdmin)
+export default connect(null, mapDispatchToProps) (ConnexionAdmin)

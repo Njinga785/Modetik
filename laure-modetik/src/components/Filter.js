@@ -9,9 +9,9 @@ export class Filter extends Component {
         super(props)
         this.state = {
             categories: []
-            // value: ''
+            
         }
-        // this.getCategorie = this.getCategorie.bind(this)
+        
     }
 
     componentDidMount() {
@@ -28,11 +28,7 @@ export class Filter extends Component {
             })
     } 
 
-    // handleChange(e) {
-    //     this.setState({
-    //         value: e.target.value
-    //     })
-    // }
+    
     render() {
         const categories = this.state.categories
         return (
@@ -40,10 +36,10 @@ export class Filter extends Component {
                 
                     <div className="filter-result">{this.props.count} produits</div>
                     <div className="filter-order"> Filtre {''} 
-                    <select value={this.state.value} onChange={this.props.filterProduits}>
+                    <select className="selection" value={this.state.value} onChange={this.props.filterProduits}>
                         <option>Categorie</option>
                         {categories && categories.map(categorie => {
-                            // console.log(categories);
+                            
                             return (
                                 <option value={categorie.id} key={categorie.id}>{categorie.categorieNom}</option>
                             )

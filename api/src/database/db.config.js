@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     user: 'root',
     password: '',
     database: "modetik",
-   //  port: 3308
+    // port: 3308
 });
 
 connection.connect(function(error){
@@ -35,7 +35,7 @@ connection.query(categorieTable, function(err, results) {
    if (err) throw err;
  });
 
- var panierTable= "CREATE TABLE IF NOT EXISTS panier (id INT AUTO_INCREMENT PRIMARY KEY, total varchar(255) NOT NULL, date varchar(500) NOT NULL, client_id int(11) DEFAULT NULL)";
+ var panierTable= "CREATE TABLE IF NOT EXISTS paniers (id INT AUTO_INCREMENT PRIMARY KEY, total varchar(255) NOT NULL, date varchar(500) NOT NULL, client_id int(11) DEFAULT NULL)";
  connection.query(panierTable, function(err, results) {
    if (err) throw err;
  });

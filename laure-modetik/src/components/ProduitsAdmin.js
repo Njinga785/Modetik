@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import Table from "react-bootstrap/Table";
-// import Button from "react-bootstrap/Button";
-// import { connect } from "react-redux";
 import axios from 'axios';
-import Modal from 'react-modal'; 
+import Modal from 'react-modal';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import { getListProduits } from "./store/actions/actionProduits";
-// import { deleteProduits } from "./store/actions/actionProduits";
-// import { deleteAdminProducts } from "./store/actions/actionAdmin";
-// import { Link } from 'react-router-dom';
 
-class ProductsAdmin extends Component {
+
+class ProduitsAdmin extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -57,9 +52,9 @@ class ProductsAdmin extends Component {
       categorie_id: this.state.categorie_id
 
 
-    }) 
+    })
 
-    let articles = { 
+    let articles = {
       nom: this.state.nom,
       prix: this.state.prix,
       description: this.state.description,
@@ -68,12 +63,12 @@ class ProductsAdmin extends Component {
 
     }
 
-    // let id = this.props.match.params.id
-    axios.put(`http://localhost:3003/produits/${this.state.id}`, articles, {headers: {'Content-Type': 'application/json'}})
+
+    axios.put(`http://localhost:3003/produits/${this.state.id}`, articles, { headers: { 'Content-Type': 'application/json' } })
 
 
 
-    
+
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("Bad response from server");
@@ -101,11 +96,11 @@ class ProductsAdmin extends Component {
 
     axios.get('http://localhost:3003/produits')
       .then((response) => {
-       
+
         console.log(response.data)
-        
+
         this.setState({ produits: response.data })
-       
+
 
       })
       .catch(error => {
@@ -114,17 +109,8 @@ class ProductsAdmin extends Component {
   }
 
   deleteProduit(id) {
-    // let id = this.props.match.params.id
-    // console.log(this)
+
     axios.delete(`http://localhost:3003/produits/${id}`, {
-      // firstName: this.state.firstName,
-      // lastName: this.state.lastName,
-      // email: this.state.email,
-      // profile: this.state.profile,
-      // id: produit.id
-
-
-
 
     })
       .then((response) => {
@@ -160,13 +146,13 @@ class ProductsAdmin extends Component {
     const produits = this.state.produits;
     return (
       <div className="allProduits">
-        <h4 className="title">LES PRODUITS</h4>
-        <Table striped bordered hover>
+        <h1 className="title">LES PRODUITS</h1>
+        <Table className="tableProduits" striped bordered hover>
           <thead>
             <tr >
               <th>Nom</th>
               <th>Prix</th>
-              <th>Description</th>
+              <th className="toto">Description</th>
               <th>Photo</th>
               <th>Categorie_id</th>
               <th>Actions</th>
@@ -179,13 +165,13 @@ class ProductsAdmin extends Component {
                 <tr key={produit.id}>
                   <td>{produit.nom}</td>
                   <td>{produit.prix}</td>
-                  <td>{produit.description}</td>
+                  <td className="descript">{produit.description}</td>
                   <td><img src={produit.photo} alt="produit" width="75" height="75" /></td>
                   <td>{produit.categorie_id}</td>
-                  <td>
-                    <span className="btn btn-primary" onClick={() => this.openModal(produit)} >Edit</span>
+                  <td className="btn-toolbar">
+                    <span className="btn btn-primary editer" onClick={() => this.openModal(produit)} >Editer</span>
 
-                    <span className="btn btn-danger" onClick={() => this.deleteProduit(produit.id)}>Delete</span>
+                    <span className="btn btn-danger supprimer" onClick={() => this.deleteProduit(produit.id)}>Supprimer</span>
                   </td>
 
                 </tr>
@@ -226,7 +212,7 @@ class ProductsAdmin extends Component {
                     <Form.Label>Categorie_id</Form.Label>
                     <Form.Control onChange={this.handleChange} value={this.state.categorie_id} type="text" placeholder="Categorie" required />
                   </Form.Group>
-                  <Button variant="success" type="submit">Submit</Button> <Button variant="outline-dark" type="close" onClick={() => this.closeModal()}>Close</Button>
+                  <Button variant="success" type="submit">Envoyer</Button> <Button variant="outline-dark" type="close" onClick={() => this.closeModal()}>Close</Button>
 
                 </Form>
               </div>
@@ -240,15 +226,6 @@ class ProductsAdmin extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   admin_products: state.adminReducer.admin_products,
-//   token: state.adminReducer.token
-// });
 
-// const mapDispatchToProps = {
-//   getListProduits,
-//   deleteProduits,
-//   deleteAdminProducts
-// };
 
-export default ProductsAdmin
+export default ProduitsAdmin

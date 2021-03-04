@@ -15,7 +15,7 @@ export class ClientsAdmin extends Component {
             lastName: '',
             email: '',
             message: '',
-            
+
             id: ''
         }
         this.openModal = this.openModal.bind(this);
@@ -28,7 +28,7 @@ export class ClientsAdmin extends Component {
             firstName: client.firstName,
             lastName: client.lastName,
             email: client.email,
-            
+
             id: client.id
         });
     }
@@ -46,26 +46,26 @@ export class ClientsAdmin extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
-           
+
 
 
         })
 
-        let personne = { 
+        let personne = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
-            profile: this.state.profile, 
-            
+            profile: this.state.profile,
+
 
 
         }
-        
-        axios.put(`http://localhost:3003/clients/${this.state.id}`, personne,  {headers: {'Content-Type': 'application/json'}}) 
+
+        axios.put(`http://localhost:3003/clients/${this.state.id}`, personne, { headers: { 'Content-Type': 'application/json' } })
 
 
 
-        
+
             .then((response) => {
                 if (response.status >= 400) {
                     throw new Error("Bad response from server");
@@ -102,10 +102,10 @@ export class ClientsAdmin extends Component {
     }
 
     deleteClient(id) {
-      
+
         axios.delete(`http://localhost:3003/clients/${id}`, {
-            
-         })
+
+        })
             .then((response) => {
                 if (response.status >= 400) {
                     throw new Error("Bad response from server");
@@ -137,13 +137,13 @@ export class ClientsAdmin extends Component {
         return (
             <div className='clients'>
                 <h4 className="title">LES CLIENTS</h4>
-                <Table striped bordered hover>
+                <Table className="tableClients" striped bordered hover>
                     <thead>
                         <tr>
                             <th>FirstName</th>
                             <th>LastName</th>
                             <th>Email</th>
-                           
+
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -151,21 +151,15 @@ export class ClientsAdmin extends Component {
                         {clients && clients.map(client => {
                             return (
 
-
                                 <tr key={client.id}>
                                     <td>{client.firstName}</td>
                                     <td>{client.lastName}</td>
                                     <td>{client.email}</td>
-                                   
                                     <td>
-                            
-
-                                        <span className="btn btn-danger" onClick={() => this.deleteClient(client.id)}>Delete</span>
+                                        <span className="btn btn-danger" onClick={() => this.deleteClient(client.id)}>Supprimer</span>
                                     </td>
                                 </tr>
                             )
-
-
 
                         })}
 
@@ -193,7 +187,7 @@ export class ClientsAdmin extends Component {
                                         <Form.Control onChange={this.handleChange} value={this.state.email} type="email" placeholder="Email" required />
                                     </Form.Group>
 
-                                    
+
                                     <Button variant="success" type="submit">Submit</Button>  <Button variant="outline-dark" type="close" onClick={() => this.closeModal()}>Close</Button>
 
                                 </Form>

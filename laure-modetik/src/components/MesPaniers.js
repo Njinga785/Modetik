@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Table from "react-bootstrap/Table";
-// import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import axios from 'axios'
 import { panierClient } from "./store/actions/actionClient";
@@ -15,7 +14,7 @@ export class MesPaniers extends Component {
     }
   }
   componentDidMount() {
-    // let id = this.props.id
+    
     axios.get(`http://localhost:3003/panier/${this.props.id}`, {
       headers: { authorization: `Bearer ${localStorage.getItem('tokenClient')}` }
     })
@@ -42,7 +41,7 @@ export class MesPaniers extends Component {
             <tr>
               <th>Total</th>
               <th>Date</th>
-              <th>client_id</th> 
+             
               
             </tr>
           </thead>
@@ -53,7 +52,7 @@ export class MesPaniers extends Component {
                 <tr key={index}>
                   <td>{panier.total}</td>
                   <td>{panier.date}</td>
-                  <td>{panier.client_id}</td>
+                  
                   
                 </tr>
               );

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
 import { connect } from "react-redux"
 import {addToPanier} from './store/actions/actionPanier'
-// import PanierItem from './PanierItem';
+
 
 export class ProductDescription extends Component {
     constructor() {
@@ -21,7 +21,7 @@ export class ProductDescription extends Component {
        
         this.props.addToPanier(id)
     }
-        // this.props.addToPanier({id: this.props.match.params.id, quantite: 1})
+        
     
     componentDidMount() {
         let id = this.props.match.params.id
@@ -29,7 +29,7 @@ export class ProductDescription extends Component {
         axios.get(`http://localhost:3003/produits/${id}`)
             .then((response) => {
                 console.log(response) 
-                // this.props.addToPanier(response.data)
+                
                 this.setState({
                     produit: response.data[0]
                 })

@@ -8,9 +8,10 @@ var salt = bcrypt.genSaltSync(10);
 const config = require('./config.js');
 const middlewares = require('../middlewares/middlewares.js');
 
-//routes clients
+/*******************************routes clients**************************************************/
 
-//sign-up 
+/*****************************client/sign-up****************************************************/ 
+
 routes.use("/clients/sign-up", middlewares.emailMiddleware)
 
 routes.post("/clients/sign-up", (req, res) => {
@@ -37,7 +38,7 @@ routes.post("/clients/sign-up", (req, res) => {
 
 })
 
-//get/clients
+/*******************************************get/clients**************************/
 
 routes.get("/clients", (req, res) => {
     try {
@@ -58,7 +59,7 @@ routes.get("/clients", (req, res) => {
 })
 
 
-//client/sign-in 
+/***********************************client/sign-in***********************************/ 
 
 
 routes.post("/clients/sign-in", (req, res) => {
@@ -97,7 +98,7 @@ routes.post("/clients/sign-in", (req, res) => {
     }
 })
 
-//get/client/:id 
+/*************************************get/client/:id*****************************/ 
 
 routes.get("/clients/:id", function (req, res) {
     try {
@@ -116,7 +117,7 @@ routes.get("/clients/:id", function (req, res) {
     }
 })
 
-
+/*************************************update/client/:id*************************/
 
 routes.put("/clients/:id", async function(req, res){ 
     console.log(req.body)
@@ -142,6 +143,7 @@ routes.put("/clients/:id", async function(req, res){
     }
 })
 
+/********************************delete/client/:id**********************************/
 
 routes.delete("/clients/:id", async function (req, res) { 
     
@@ -162,7 +164,9 @@ routes.delete("/clients/:id", async function (req, res) {
         res.status(400).send(err)
 
     }
-})
+}) 
+
+/************************************post/categorie********************************/
 
 
 routes.post("/categorie", (req, res) => {
@@ -183,6 +187,8 @@ routes.post("/categorie", (req, res) => {
     }
 }) 
 
+/**************************************get/categorie**********************************/
+
 routes.get("/categorie", (req, res) => {
     try {
         db.query(`SELECT * FROM categorie`, function (err, result) {
@@ -200,7 +206,7 @@ routes.get("/categorie", (req, res) => {
     }
 })
 
-
+/*************************************get/produits*******************************/
 
 routes.get("/produits", (req, res) => {
     try {
@@ -219,6 +225,7 @@ routes.get("/produits", (req, res) => {
     }
 })
 
+/****************************get/produits/filter/categorie*******************************/
 
 routes.get("/produits/filter/:categorie_id", (req, res) => {
     try {
@@ -238,8 +245,7 @@ routes.get("/produits/filter/:categorie_id", (req, res) => {
     }
 })
 
-
-
+/*************************************get/produits/:id*********************************/
 
 routes.get("/produits/:id", (req, res) => {
     try {
@@ -259,7 +265,9 @@ routes.get("/produits/:id", (req, res) => {
     }
 })
 
-//  routes.use("/produits", middlewares.isAdmin)
+/*******************************************post/produits*************************************/
+
+routes.use("/produits", middlewares.isAdmin)
 
 routes.post("/produits", (req, res) => {
     try {
@@ -285,10 +293,7 @@ routes.post("/produits", (req, res) => {
 
 })
 
-
-
-
-
+/*************************************update/produits/:id*****************************/
 
 routes.put("/produits/:id", async function (req, res) {
 
@@ -309,6 +314,7 @@ routes.put("/produits/:id", async function (req, res) {
     }
 })
 
+/*********************************delete/produits/:id*************************************/
 
 routes.delete("/produits/:id", async function (req, res) {
 
@@ -328,6 +334,7 @@ routes.delete("/produits/:id", async function (req, res) {
     }
 })
 
+/********************************admin/sign-up*****************************************/
 
 routes.post("/admin/sign-up", (req, res) => {
     try {
@@ -354,7 +361,7 @@ routes.post("/admin/sign-up", (req, res) => {
 
 }) 
 
-
+/***********************************admin/sign-in****************************************/
 
 routes.post("/admin/sign-in", (req, res) => {
     try {
@@ -392,6 +399,8 @@ routes.post("/admin/sign-in", (req, res) => {
 
 })
 
+/******************************************post/panier**********************************/
+
 routes.use("/panier", middlewares.tokenMiddleware)
 
 routes.post("/panier", (req, res) => {
@@ -428,6 +437,8 @@ routes.post("/panier", (req, res) => {
 
 }) 
 
+/**********************************get/panier***************************************** */
+
 routes.get("/panier/:id", (req, res) => {
     try { 
         // let id = req.params.id
@@ -450,6 +461,7 @@ routes.get("/panier/:id", (req, res) => {
     }
 }) 
 
+/*************************************poast/profil**************************************/
 routes.post("/profile", (req, res) => {
     try {
         if (!req.body.firstName) throw 'NO FIRSTNAME'
@@ -474,6 +486,8 @@ routes.post("/profile", (req, res) => {
 
 }) 
 
+/*****************************************get/profil**************************************/
+
 routes.get("/profile", (req, res) => {
     try {
 
@@ -493,27 +507,6 @@ routes.get("/profile", (req, res) => {
 })
 
 
-// routes.post("/panieritem", (req, res) => {
-//     try {
-//         if (!req.body.product_id) throw 'NO PRODUIT_ID'
-//         if (!req.body.panier_id) throw 'NO PANIER_ID'
-//         if (!req.body.quantite) throw 'NO QUANTITE'
-//         console.log(req.body)
-
-//         var sql = `INSERT INTO panieritem (produit_id, panier_id, quantite) VALUES ('${req.body.produit_id}', '${req.body.panier_id}', '${req.body.quantite}')`;
-//         db.query(sql, function (err, result) {
-//             if (err) throw err;
-//             console.log(result)
-//             res.send(result)
-//         });
-
-
-//     } catch (err) {
-//         console.log(err)
-//         res.status(403).send(err)
-//     }
-
-// })
 
 
 
