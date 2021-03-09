@@ -135,7 +135,7 @@ export class ClientsAdmin extends Component {
     render() {
         const clients = this.state.clients
         return (
-            <div className='clients'>
+            <div className="clients col-11 col-md-8 mx-auto">
                 <h4 className="title">LES CLIENTS</h4>
                 <Table className="tableClients" striped bordered hover>
                     <thead>

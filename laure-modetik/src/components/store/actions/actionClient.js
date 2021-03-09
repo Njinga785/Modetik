@@ -1,12 +1,12 @@
 
 
 
-export const SignInClients = (token, firstName, email, id) => ({
+export const SignInClients = (token, firstName, lastName, email, id) => ({
     type: "SIGN-INCLIENTS",
     token: token,
     firstName: firstName,
     email: email, 
-    
+    lastName: lastName,
     id: id
 }) 
 

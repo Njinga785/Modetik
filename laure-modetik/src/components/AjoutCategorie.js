@@ -46,7 +46,7 @@ export class AddCategorie extends Component {
 
     render() {
         return (
-            <div className="categorie">
+            <div className="categorie col-11 col-md-8 mx-auto">
                 <h1 className="titreForm">AJOUT-CATEGORIE</h1>
                 <Form onSubmit={this.handleSubmit}>
                     

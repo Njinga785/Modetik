@@ -44,7 +44,7 @@ export class ProductList extends Component {
             console.log(e)
             try {
                  
-                console.log(this.state.categorie_id)
+                // console.log(this.state.categorie_id)
         
                 let result = await axios.get(`http://localhost:3003/produits/filter/${e.target.value}`)
 

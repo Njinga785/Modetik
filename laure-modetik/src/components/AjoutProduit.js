@@ -57,7 +57,7 @@ export class AddProduct extends Component {
     render() {
         return (
             <div>
-                <div className="form">
+                <div className="form col-11 col-md-8 mx-auto">
                     <h1 className="titreForm">AJOUT-PRODUIT</h1>
                     <Form onSubmit={this.handleSubmit}>
 

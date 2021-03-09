@@ -34,9 +34,10 @@ export class Connexion extends Component {
                     console.log('je suis bien dans le if')
                     localStorage.setItem('tokenClient', response.data.token)
                     localStorage.setItem('firstName', decoded.firstName)
+                    localStorage.setItem('lastName', decoded.lastName)
                     localStorage.setItem('email', decoded.email)
                     localStorage.setItem('id', decoded.id)
-                    this.props.SignInClients(response.data.token, decoded.firstName, decoded.email, decoded.id)
+                    this.props.SignInClients(response.data.token, decoded.firstName, decoded.lastName, decoded.email, decoded.id)
                     //  this.props.userProducts()
                     this.props.history.push('/mespaniers')
                 } else {
@@ -59,7 +60,7 @@ export class Connexion extends Component {
     render() {
         return (
             <div>
-                <div className="form">
+                <div className="form col-11 col-md-8 mx-auto">
                     <h1 className="titreForm">Connection</h1>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="email">

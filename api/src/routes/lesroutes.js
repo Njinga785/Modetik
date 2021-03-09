@@ -79,7 +79,7 @@ routes.post("/clients/sign-in", (req, res) => {
                     bcrypt.compare(req.body.password, result[0].password, function (error, results) {
                         console.log(results)
                         if (results === true) {
-                            let token = jwt.sign({ firstName: result[0].firstName, email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
+                            let token = jwt.sign({ firstName: result[0].firstName, lastName: result[0].lastName, email: result[0].email, id: result[0].id }, config.secret, { expiresIn: 86400 });
                             console.log(token)
                             res.send({ token: token })
                             console.log('your recognize')
@@ -137,7 +137,7 @@ routes.put("/clients/:id", async function (req, res) {
     console.log(id);
 
     try {
-        db.query(`UPDATE clients SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}', password = '${password}'  WHERE id = '${id}'`, async function (err, results) {
+        db.query(`UPDATE clients SET firstName = ?, lastName = ?, email = ?, password = ?  WHERE id = '${id}'`, [profile.firstName, profile.lastName, profile.email, profile.password], async function (err, results) {
             if (err) {
                 res.status(400).send("Error")
             } else {

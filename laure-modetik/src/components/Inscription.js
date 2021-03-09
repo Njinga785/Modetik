@@ -134,7 +134,7 @@ export class SignUp extends Component {
 
   render() {
     return (
-      <div className="inscrit">
+      <div className="inscrit col-11 col-md-8 mx-auto">
         <Form onSubmit={this.handleSubmitClient}>
           <h1 className="titreForm">Inscription</h1>
           <Form.Group controlId="firstName">
@@ -171,7 +171,7 @@ export class SignUp extends Component {
           </Form.Group>
 
           <Button variant="success" type="submit">Envoyer</Button>
-          <p className="error">{this.state.message}</p>
+          <p className="editer">{this.state.message}</p>
 
         </Form>
       </div>

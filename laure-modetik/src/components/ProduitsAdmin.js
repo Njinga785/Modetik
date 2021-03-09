@@ -16,7 +16,8 @@ class ProduitsAdmin extends Component {
       prix: '',
       description: '',
       categorie_id: '',
-      id: ''
+      id: '',
+      message: ''
 
     }
     this.openModal = this.openModal.bind(this);
@@ -64,7 +65,7 @@ class ProduitsAdmin extends Component {
     }
 
 
-    axios.put(`http://localhost:3003/produits/${this.state.id}`, articles, { headers: { 'Content-Type': 'application/json' } })
+    axios.put(`http://localhost:3003/produits/${this.state.id}`, articles, { headers: { authorization: `Bearer ${localStorage.getItem('tokenAdmin')}` } })
 
 
 
@@ -125,7 +126,7 @@ class ProduitsAdmin extends Component {
         console.log(data)
         if (data === "success") {
           this.setState({
-            message: "client has been delete"
+            message: "produit has been delete"
           });
         }
       }).catch((err) => {
@@ -145,7 +146,7 @@ class ProduitsAdmin extends Component {
 
     const produits = this.state.produits;
     return (
-      <div className="allProduits">
+      <div className="allProduits col-11 col-md-8 mx-auto">
         <h1 className="title">LES PRODUITS</h1>
         <Table className="tableProduits" striped bordered hover>
           <thead>
@@ -170,7 +171,7 @@ class ProduitsAdmin extends Component {
                   <td>{produit.categorie_id}</td>
                   <td className="btn-toolbar">
                     <span className="btn btn-primary editer" onClick={() => this.openModal(produit)} >Editer</span>
-
+                    
                     <span className="btn btn-danger supprimer" onClick={() => this.deleteProduit(produit.id)}>Supprimer</span>
                   </td>
 
@@ -213,7 +214,7 @@ class ProduitsAdmin extends Component {
                     <Form.Control onChange={this.handleChange} value={this.state.categorie_id} type="text" placeholder="Categorie" required />
                   </Form.Group>
                   <Button variant="success" type="submit">Envoyer</Button> <Button variant="outline-dark" type="close" onClick={() => this.closeModal()}>Close</Button>
-
+                  <p className="editer">{this.state.message}</p>
                 </Form>
               </div>
             </Modal>

@@ -11,11 +11,12 @@ const initialState = {
 const clientReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SIGN-INCLIENTS": 
-        // console.log(action)
+        console.log(action)
             return {
                 ...state,
                 token: action.token,
                 firstName: action.firstName,
+                lastName: action.lastName,
                 email: action.email,
                 profile: action.profile,
                 id: action.id
@@ -32,6 +33,7 @@ const clientReducer = (state = initialState, action) => {
                 
             }; 
             case "UPDATE_PROFILE":
+                console.log(action.firstName, action.lastName,action.email, action.password)
             return {
                 ...state,
                 firstName: action.firstName, 
@@ -42,7 +44,7 @@ const clientReducer = (state = initialState, action) => {
                 
             };
             case "PANIER-CLIENT": 
-            // console.log(action.panier_client)
+             console.log(action.panier_client)
                 return { 
                     ...state,
                     panier_client: [...action.panier_client]

@@ -34,7 +34,7 @@ export class MesPaniers extends Component {
   render() {
     let panier_client = this.props.panier_client
     return (
-      <div className="panier">
+      <div className="panier col-11 col-md-8 mx-auto">
         <h4 className="title">MES PANIERS</h4>
         <Table striped bordered hover>
           <thead>
