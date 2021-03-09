@@ -17,21 +17,22 @@ export class ClientProfile extends Component {
       firstName: this.props.firstName,
       lastName: this.props.lastName,
       email: this.props.email,
-      password: this.props.password, 
-      profile: this.props.profile
+      // password: this.props.password,
+      message: ''
 
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault() 
+    const target = e.target
     console.log({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      password: this.state.password, 
-      
+      // password: this.state.password,
+
 
     })
     let id = this.props.match.params.id
@@ -40,15 +41,15 @@ export class ClientProfile extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      password: this.state.password, 
-      
+      password: target.password.value
+
 
 
     })
       .then((response) => {
 
         this.props.updateProfile({ token: response.data.token, firstname: response.data.firstName, lastName: response.data.lastName, email: response.data.email, password: response.data.password })
-
+        this.setState({ message: "votre profil a bien été mis à jour" })
       })
       .catch((err) => {
         console.log(err)
@@ -73,10 +74,10 @@ export class ClientProfile extends Component {
             <Form.Control onChange={this.handleChange} value={this.state.firstName} type="text" placeholder="First Name" required />
           </Form.Group>
 
-           <Form.Group controlId="lastName">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control onChange={this.handleChange} value={this.state.lastName} type="text" placeholder="Last Name" required />
-                    </Form.Group> 
+          <Form.Group controlId="lastName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control onChange={this.handleChange} value={this.state.lastName} type="text" placeholder="Last Name" required />
+          </Form.Group>
 
 
           <Form.Group controlId="email">
@@ -89,23 +90,22 @@ export class ClientProfile extends Component {
 
 
 
-           <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control onChange={this.handleChange} value={this.state.password} type="password" placeholder="password" required/>
-                    </Form.Group> 
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control  type="password" placeholder="password" required />
+          </Form.Group>
 
-           
 
-          <div className="invalid-feedback d-block">
+
+          {/* <div className="invalid-feedback d-block">
             {this.state.message}
-          </div>
+          </div> */}
 
-          <Button variant="success" type="submit">
-            Submit
-                    </Button>
+          <Button variant="success" type="submit">Submit</Button>
+          <p className="update">{this.state.message}</p>
 
         </Form>
-       
+
       </div>
     )
   }
@@ -119,7 +119,7 @@ const mapStateToProps = (state) => ({
   firstName: state.clientReducer.firstName,
   lastName: state.clientReducer.lastName,
   email: state.clientReducer.email,
-  password: state.clientReducer.password, 
+  password: state.clientReducer.password,
   // profile: state.clientReducer.profile
 })
 export default connect(mapStateToProps, mapDispatchToProps)(ClientProfile)

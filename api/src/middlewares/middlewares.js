@@ -42,9 +42,7 @@ const isAdmin = (req, res, next) => {
 
 const emailMiddleware = (req, res, next) => {
     
-
-
-    db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {
+db.query(`SELECT * FROM clients WHERE email = '${req.body.email}'`, async function (err, results) {
         if (err) throw err;
         if (results.length) {
             console.log('err email already exist')

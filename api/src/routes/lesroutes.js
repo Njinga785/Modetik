@@ -10,30 +10,34 @@ const middlewares = require('../middlewares/middlewares.js');
 
 /*******************************routes clients**************************************************/
 
-/*****************************client/sign-up****************************************************/ 
+/*****************************client/sign-up****************************************************/
 
 routes.use("/clients/sign-up", middlewares.emailMiddleware)
 
-routes.post("/clients/sign-up", (req, res) => {
+routes.post("/clients/sign-up", async function (req, res) {
+
+    const client = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: await bcrypt.hash(req.body.password, saltRounds)
+    }
+
     try {
+
         if (!req.body.firstName) throw 'NO FIRSTNAME'
         if (!req.body.lastName) throw 'NO LASTNAME'
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-        
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-            bcrypt.hash(req.body.password, salt, (err, hash) => {
-                console.log(hash)
-                var sql = `INSERT INTO clients (firstName, lastName, email,password) VALUES ('${req.body.firstName}','${req.body.lastName}', '${req.body.email}', '${hash}')`;
-                db.query(sql, function (err, result) {
-                    if (err) throw err;
-                    console.log(result)
-                    res.send(result)
-                });
-            });
-        });
+        db.query("INSERT INTO clients SET ?", client, function (err, results) {
+            if (err) {
+                res.status(400).send("Error")
+            }
+
+            res.status(200).send("User inserted")
+        })
     } catch (err) {
-        res.status(403).send(err)
+        res.status(400).send("Error")
     }
 
 })
@@ -59,7 +63,7 @@ routes.get("/clients", (req, res) => {
 })
 
 
-/***********************************client/sign-in***********************************/ 
+/***********************************client/sign-in***********************************/
 
 
 routes.post("/clients/sign-in", (req, res) => {
@@ -98,7 +102,7 @@ routes.post("/clients/sign-in", (req, res) => {
     }
 })
 
-/*************************************get/client/:id*****************************/ 
+/*************************************get/client/:id*****************************/
 
 routes.get("/clients/:id", function (req, res) {
     try {
@@ -119,35 +123,41 @@ routes.get("/clients/:id", function (req, res) {
 
 /*************************************update/client/:id*************************/
 
-routes.put("/clients/:id", async function(req, res){ 
+routes.put("/clients/:id", async function (req, res) {
     console.log(req.body)
-    const { firstName, lastName, email, profile } = req.body
-    
+
+    const profile = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: await bcrypt.hash(req.body.password, saltRounds)
+    }
+
     const id = req.params.id
     console.log(id);
-    
-    try{
-        db.query(`UPDATE clients SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}' , profile = '${profile}' WHERE id = '${id}'`, async function(err, results) {
+
+    try {
+        db.query(`UPDATE clients SET firstName = '${firstName}', lastName = '${lastName}', email = '${email}', password = '${password}'  WHERE id = '${id}'`, async function (err, results) {
             if (err) {
                 res.status(400).send("Error")
             } else {
                 res.status(200).send("Updated")
 
-               
+
             }
-        })     
-        
-       
-    } catch(err){
+        })
+
+
+    } catch (err) {
         res.status(400).send("Error")
     }
 })
 
 /********************************delete/client/:id**********************************/
 
-routes.delete("/clients/:id", async function (req, res) { 
-    
-    const id = req.params.id 
+routes.delete("/clients/:id", async function (req, res) {
+
+    const id = req.params.id
     console.log(id)
 
     try {
@@ -164,10 +174,11 @@ routes.delete("/clients/:id", async function (req, res) {
         res.status(400).send(err)
 
     }
-}) 
+})
 
-/************************************post/categorie********************************/
+/************************************categorie********************************/
 
+/************************************post/categorie****************************/
 
 routes.post("/categorie", (req, res) => {
     try {
@@ -185,7 +196,7 @@ routes.post("/categorie", (req, res) => {
         res.status(403).send(err)
 
     }
-}) 
+})
 
 /**************************************get/categorie**********************************/
 
@@ -205,6 +216,8 @@ routes.get("/categorie", (req, res) => {
 
     }
 })
+
+/*****************************************produits********************************/
 
 /*************************************get/produits*******************************/
 
@@ -232,7 +245,7 @@ routes.get("/produits/filter/:categorie_id", (req, res) => {
         db.query(`SELECT * FROM produits WHERE categorie_id = ${req.params.categorie_id}`, function (err, result) {
             if (err) {
                 res.status(400).send("Error")
-            } else { 
+            } else {
                 console.log(result)
                 res.status(200).send(result)
             }
@@ -270,6 +283,13 @@ routes.get("/produits/:id", (req, res) => {
 routes.use("/produits", middlewares.isAdmin)
 
 routes.post("/produits", (req, res) => {
+    const produit = {
+        nom: req.body.nom,
+        prix: req.body.prix,
+        description: req.body.description,
+        photo: req.body.photo,
+        categorie_id: req.body.categorie_id
+    }
     try {
         if (!req.body.nom) throw 'NO NAME'
         if (!req.body.prix) throw 'NO PRICE'
@@ -278,18 +298,19 @@ routes.post("/produits", (req, res) => {
         if (!req.body.categorie_id) throw 'NO CATEGORIE'
         console.log(req.body)
 
-        var sql = `INSERT INTO produits (nom, prix, description, photo, categorie_id) VALUES ('${req.body.nom}', '${req.body.prix}', '${req.body.description}', '${req.body.photo}', ${parseInt(req.body.categorie_id)})`;
-        db.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log(result)
-            res.send(result)
-        });
+        db.query("INSERT INTO produits SET ?", produit, function (err, results) {
+            if (err) {
+                res.status(400).send("Error")
 
-
+            } else {
+                res.status(200).send({ produit_id: results.insertId })
+            }
+        })
     } catch (err) {
-        console.log(err)
-        res.status(403).send(err)
+        res.status(400).send("Error")
     }
+
+
 
 })
 
@@ -334,32 +355,35 @@ routes.delete("/produits/:id", async function (req, res) {
     }
 })
 
+/**********************************admin***********************************************/
+
 /********************************admin/sign-up*****************************************/
 
-routes.post("/admin/sign-up", (req, res) => {
+routes.post("/admin/sign-up", async function (req, res) {
+    
+    const admine = {
+        name: req.body.name,
+        email: req.body.email,
+        password: await bcrypt.hash(req.body.password, saltRounds)
+    }
+
     try {
+
         if (!req.body.name) throw 'NO NAME'
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-        if (!req.body.profile) throw 'NO PROFILE'
+        db.query("INSERT INTO admin SET ?", admine, function (err, results) {
+            if (err) {
+                res.status(400).send("Error")
+            }
 
-
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-            bcrypt.hash(req.body.password, salt, (err, hash) => {
-                console.log(hash)
-                var sql = `INSERT INTO admin (name, email, password, profile) VALUES ('${req.body.name}', '${req.body.email}', '${hash}', '${req.body.profile}')`;
-                db.query(sql, function (err, result) {
-                    if (err) throw err;
-                    console.log(result)
-                    res.send(result)
-                });
-            });
-        });
+            res.status(200).send("User inserted")
+        })
     } catch (err) {
-        res.status(403).send(err)
+        res.status(400).send("Error")
     }
 
-}) 
+})
 
 /***********************************admin/sign-in****************************************/
 
@@ -367,37 +391,39 @@ routes.post("/admin/sign-in", (req, res) => {
     try {
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-    db.query(`SELECT * FROM admin WHERE email = '${req.body.email}'`, function (err, result) {
-        console.log(result);
-        if (err) {
-            res.send('non')
-        } else {
-            if (result.length > 0) {
-                bcrypt.compare(req.body.password, result[0].password, function (error, results) {
-                    console.log(results)
-                    if (results === true) {
-                        let token = jwt.sign({ email: result[0].email, id: result[0].id, isAdmin: true }, config.secret, { expiresIn: 86400 });
-                        console.log(token)
-                        res.send({ token: token })
-                        console.log('your recognize')
-                    } else {
-                        console.log('who are you')
-                        console.log(results);
-                    }
-
-                })
+        db.query(`SELECT * FROM admin WHERE email = '${req.body.email}'`, function (err, result) {
+            console.log(result);
+            if (err) {
+                res.send('non')
             } else {
-                console.log('faux mail')
+                if (result.length > 0) {
+                    bcrypt.compare(req.body.password, result[0].password, function (error, results) {
+                        console.log(results)
+                        if (results === true) {
+                            let token = jwt.sign({ email: result[0].email, id: result[0].id, isAdmin: true }, config.secret, { expiresIn: 86400 });
+                            console.log(token)
+                            res.send({ token: token })
+                            console.log('your recognize')
+                        } else {
+                            console.log('who are you')
+                            console.log(results);
+                        }
+
+                    })
+                } else {
+                    console.log('faux mail')
+                }
+
             }
 
-        }
-
-    }) 
-} catch (error) {
-    res.status(403).send(error)
-}
+        })
+    } catch (error) {
+        res.status(403).send(error)
+    }
 
 })
+
+/********************************************panier**************************************/
 
 /******************************************post/panier**********************************/
 
@@ -406,7 +432,7 @@ routes.use("/panier", middlewares.tokenMiddleware)
 routes.post("/panier", (req, res) => {
     try {
         console.log(req.body);
-        console.log("--------------"); 
+        console.log("--------------");
         console.log(req.decoded)
         // if (!req.body.date) throw 'NO DATE'
         if (!req.body.total) throw 'NO TOTAL'
@@ -415,17 +441,17 @@ routes.post("/panier", (req, res) => {
         var sql = `INSERT INTO paniers (total, client_id) VALUES ('${req.body.total}', ${req.decoded.id})`;
         db.query(sql, function (err, result) {
             if (err) throw err;
-            console.log(result) 
+            console.log(result)
             // créer une boucle qui parcours mon panier 
             // let panier = req.body
-          for (var i = 0; i < req.body.addedProduits.length; i++) {
-          var item =  `INSERT INTO panieritem (panier_id, produit_id, quantité) VALUES('${result.insertId}', '${req.body.addedProduits[i].id}', '${req.body.addedProduits[i].quantite}')`
-            db.query(item, function (err, res) {
-                if (err) throw err 
-                console.log(res)
-            }) 
-        }  
-          res.send(result)
+            for (var i = 0; i < req.body.addedProduits.length; i++) {
+                var item = `INSERT INTO panieritem (panier_id, produit_id, quantité) VALUES('${result.insertId}', '${req.body.addedProduits[i].id}', '${req.body.addedProduits[i].quantite}')`
+                db.query(item, function (err, res) {
+                    if (err) throw err
+                    console.log(res)
+                })
+            }
+            res.send(result)
 
         });
 
@@ -435,21 +461,21 @@ routes.post("/panier", (req, res) => {
         res.status(403).send(err)
     }
 
-}) 
+})
 
 /**********************************get/panier***************************************** */
 
 routes.get("/panier/:id", (req, res) => {
-    try { 
+    try {
         // let id = req.params.id
         // console.log("/GET")
         db.query(`SELECT * FROM paniers WHERE client_id = '${req.params.id}'`, function (err, result) {
             if (err) {
                 res.status(400).send("Error")
-            } else { 
-                console.log('mes paniers') 
+            } else {
+                console.log('mes paniers')
                 console.log(req.params.id)
-                 console.log(result)
+                console.log(result)
                 res.status(200).send(result)
             }
         })
@@ -459,7 +485,9 @@ routes.get("/panier/:id", (req, res) => {
         res.status(400).send("Error")
 
     }
-}) 
+})
+
+/****************************************profil*******************************************/
 
 /*************************************poast/profil**************************************/
 routes.post("/profile", (req, res) => {
@@ -468,7 +496,7 @@ routes.post("/profile", (req, res) => {
         if (!req.body.lastName) throw 'NO LASTNAME'
         if (!req.body.email) throw 'NO EMAIL'
         if (!req.body.password) throw 'NO PASSWORD'
-        
+
         bcrypt.genSalt(saltRounds, (err, salt) => {
             bcrypt.hash(req.body.password, salt, (err, hash) => {
                 console.log(hash)
@@ -484,7 +512,7 @@ routes.post("/profile", (req, res) => {
         res.status(403).send(err)
     }
 
-}) 
+})
 
 /*****************************************get/profil**************************************/
 

@@ -40,7 +40,7 @@ export class SignUp extends Component {
 
         })
         .catch((err) => {
-          this.setState({ message: "Email already registered" })
+          this.setState({ message: "Email existe déjà" })
         })
     }
   }
@@ -167,9 +167,11 @@ export class SignUp extends Component {
           <Form.Group controlId="conPassword">
             <Form.Label>ConPassword</Form.Label>
             <Form.Control onChange={this.handleChange} type="password" placeholder="conPassword" />
+            <div className="text-danger">{this.state.errors.conPassword}</div>
           </Form.Group>
 
           <Button variant="success" type="submit">Envoyer</Button>
+          <p className="error">{this.state.message}</p>
 
         </Form>
       </div>

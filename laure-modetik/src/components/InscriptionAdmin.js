@@ -12,9 +12,9 @@ export class SignUpAdmin extends Component {
             password: '',
             conPassword: '',
             message: '',
-            error: {}
+            
         }
-
+         this.handleSignUpAdmin = this.handleSignUpAdmin.bind(this)
     }
 
     async handleSignUpAdmin(e) {
@@ -28,11 +28,11 @@ export class SignUpAdmin extends Component {
                 this.setState({ message: "Vous avez bien été enregistré!" })
 
             } catch (err) {
-                this.setState({ message: "Email already registered" })
+                this.setState({ message: "Email existe déjà" })
 
             }
         } else {
-            this.setState({ message: "Sorry, one or more inputs are empty" })
+            this.setState({ message: "veillez remplir tous les champs" })
         }
 
 

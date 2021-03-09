@@ -13,7 +13,7 @@ import { panierClient } from './store/actions/actionClient'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineHome } from 'react-icons/ai';
- import { clearPanier } from './store/actions/actionPanier'
+import { clearPanier } from './store/actions/actionPanier'
 
 
 export class Header extends Component {
@@ -26,7 +26,7 @@ export class Header extends Component {
             categorieNom: '',
             addedProduits: []
         }
-        
+
     }
 
     signOutAdmin = () => {
@@ -68,19 +68,19 @@ export class Header extends Component {
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
-                            
+
                             <Nav className="mr-auto">
-                                <Nav.Link as={Link} to="/admin/addproduct"><h6 className="linkText">AjoutProduct</h6></Nav.Link>
+                                <Nav.Link as={Link} to="/admin/addproduct"><h6 className="linkText">AjoutProduit</h6></Nav.Link>
                                 <Nav.Link as={Link} to="/admin/addcategorie"><h6 className="linkText">AjoutCategorie</h6></Nav.Link>
                                 <Nav.Link as={Link} to="/admin/produistadmin"><h6 className="linkText">ProduitsAdmin</h6></Nav.Link>
                                 <Nav.Link as={Link} to="/admin/editclient/:id"><h6 className="linkText">ClientsAdmin</h6></Nav.Link>
-                            </Nav> 
-                            <Nav>
-                            <Navbar.Brand href="/" onClick={this.signOutAdmin}><h6 className="linkText">Deconnexion</h6></Navbar.Brand>
                             </Nav>
-                        
+                            <Nav>
+                                <Navbar.Brand href="/" onClick={this.signOutAdmin}><h6 className="linkText">Deconnexion</h6></Navbar.Brand>
+                            </Nav>
+
                         </Navbar.Collapse>
-                       
+
                     </Navbar >
 
 
@@ -91,13 +91,15 @@ export class Header extends Component {
                 return (
                     <Navbar collapseonselect='true' expand="lg" bg="light" variant="light" fixed='top'>
 
-
                         <Navbar.Brand href="#home"><img src={logo} width='40' height='40' alt="logo" />
                             <div className='titre'> <img src={titre} alt='titre' /></div>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav  className=" align-right">
+                        <Nav className="mr-auto">
+                            <Nav.Link as={Link} to="/"><AiOutlineHome color='green' size='2rem' /></Nav.Link>
+                        </Nav>
+                            <Nav>
                                 <Nav.Link as={Link} to="/admin/sign-up"><h6 className="linkText">InscriptionAdmin</h6></Nav.Link>
 
 
@@ -162,7 +164,7 @@ const mapStateToProps = (state) => ({
     produits: state.panierReducer.addedProduits,
     id: state.clientReducer.profile,
     addedProduits: state.panierReducer.addedProduits,
-    
+
 
 })
 
