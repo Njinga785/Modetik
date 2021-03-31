@@ -1,4 +1,4 @@
- ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/react-router-blue?)  ![](https://img.shields.io/badge/react-redux-blue?) ![](https://img.shields.io/badge/redux-persist-blue?) ![](https://img.shields.io/badge/react-devtool-blue?) ![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript)  
+ ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/react-router-blue?)  ![](https://img.shields.io/badge/react-redux-blue?) ![](https://img.shields.io/badge/redux-persist-blue?) ![](https://img.shields.io/badge/react-devtool-blue?)  ![](https://img.shields.io/badge/made%20with-react-bootstrap-blue?logo=react-bootstrap) ![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript)  
 
 
 # Table of contents
@@ -43,7 +43,7 @@ This App is an E-commerce, you can:
 * edit your product
 * acces to your old basket
 * ...
-* 
+
 
 
 
