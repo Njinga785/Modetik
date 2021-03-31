@@ -1,4 +1,4 @@
- ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/react-router-blue?)  ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript)  
+ ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/react-router-blue?)  ![](https://img.shields.io/badge/react-redux-blue?)  ![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript)  
 
 
 # Table of contents
