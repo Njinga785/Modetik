@@ -1,3 +1,6 @@
+![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript) ![](https://img.shields.io/badge/made%20with-react-blue?logo=react) 
+
+
 # Table of contents
 
 ## Techno 
@@ -42,4 +45,4 @@ This App is an E-commerce, you can:
 * 
 
 
-![](https://img.shields.io/badge/made%20with-JS-green?logo=javascript) 
+
