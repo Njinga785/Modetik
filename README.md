@@ -45,5 +45,16 @@ This App is an E-commerce, you can:
 * ...
 
 
+## Status 
+
+Projet is finish 
+
+
+## Contact  
+
+* [linkedin]: https://linkedin.com/in/laure-adrienne-njinga
+* morveunkraps@gmail.com
+
+
 
 
