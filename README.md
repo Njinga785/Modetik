@@ -52,7 +52,10 @@ Projet is finish
 
 ## Contact  
 
-* [linkedin]: https://linkedin.com/in/laure-adrienne-njinga
+*  <a href="https://linkedin.com/in/laure-adrienne-njinga">
+    <img alt="linkedin" src="https://img.shields.io/badge/linkedin-blue?logo=linkedin"/>
+  </a>
+ 
 * morveunkraps@gmail.com
 
 
