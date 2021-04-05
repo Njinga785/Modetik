@@ -1,4 +1,4 @@
-#Modetik
+# Modetik
 
 ![](https://img.shields.io/badge/made%20with-react-blue?logo=react)  ![](https://img.shields.io/badge/react-router-blue?)  ![](https://img.shields.io/badge/react-redux-blue?) ![](https://img.shields.io/badge/redux-persist-blue?) ![](https://img.shields.io/badge/react-devtool-blue?)  ![](https://img.shields.io/badge/made%20with-bootstrap-purple?logo=bootstrap) ![](https://img.shields.io/badge/made%20with-javascript-yellow?logo=javascript) ![](https://img.shields.io/badge/made%20with-MySQL-blue?logo=MySQL) ![](https://img.shields.io/badge/made%20with-jsonwebtokens-orange?) ![](https://img.shields.io/badge/made%20with-bcrypt-coral?)  ![](https://img.shields.io/badge/made%20with-node.js-green?logo=node.js) ![](https://img.shields.io/badge/axios-blue?)  ![](https://img.shields.io/badge/express-green?)  ![](https://img.shields.io/badge/cors-blue?)
 
